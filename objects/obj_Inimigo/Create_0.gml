@@ -31,6 +31,7 @@ state = EnemyState.PATROL;
 
 function checkDeath(){
 	if (hpEnemy <= 0){
+		dropItem();
 		state = EnemyState.DEATH;	
 	}
 }
@@ -39,6 +40,15 @@ function aplicarRecoil(_forca){
 	recoil_force = _forca * -facing; 
 }
 
-function dropItem(_chnce){
+//Drop de Item com 5% de drop poção vida, 15% munição e restante dropa nada
+function dropItem(){
+	var chance = irandom_range(1,100);
 	
+	if (chance <= 5){
+		//instance_create_layer(x,y,"Instances",obj_Potion);
+		show_debug_message("Dropou Potion");
+	}else if (chance <= 20){
+		//instance_create_layer(x,y,"Instances",obj_Ammo);
+		show_debug_message("Dropou Munição");
+	}
 }
