@@ -70,14 +70,17 @@ switch (state) {
 			bullet.direction = facing == 1 ? 0 : 180;
 			bullet.speed = 6;
 			
+			aplicarRecoil(2)
+			
 			ataque = true;
 		}
 		
 		// Final do ataque
 		if (ataque_cool >= ataque_delay){
-			
 			ataque_cool = 0;
 			ataque = false;
+			state = EnemyState.ATTACK;
+		}else if (distance_to_object(obj_Player) >= 20){
 			state = EnemyState.CHASE;
 		}
 		
@@ -94,7 +97,18 @@ switch (state) {
 		
 	break;
 }
-
+//Recoil
+if (recoil_force != 0){
+	
+	hspdEnemy += recoil_force;
+	
+	// Redução gradual do recoil
+	recoil_force -= sign(recoil_force) * recoil_decay;
+	
+	if (abs(recoil_force) < recoil_decay){
+		recoil_force = 0;
+	}
+}
 
 // GRAVIDADE
 vspdEnemy += grv;

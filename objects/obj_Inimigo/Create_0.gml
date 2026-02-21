@@ -17,7 +17,8 @@ ataque_delay = 15;
 target = noone;
 facing = 1;
 
-
+recoil_force = 0;
+recoil_decay = 0.2;
 
 enum EnemyState{
 	PATROL, 
@@ -32,4 +33,8 @@ function checkDeath(){
 	if (hpEnemy <= 0){
 		state = EnemyState.DEATH;	
 	}
+}
+
+function aplicarRecoil(_forca){
+	recoil_force = _forca * -facing; 
 }
