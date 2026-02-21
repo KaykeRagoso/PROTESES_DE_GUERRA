@@ -1,3 +1,4 @@
+checkDeath();
 // Trocar Estado quando o player tiver perto do inimigo
 if (instance_exists(obj_Player) && state != EnemyState.ATTACK && state != EnemyState.DEATH){
 	
@@ -87,6 +88,8 @@ switch (state) {
 		
 		hspdEnemy = 0;
 		vspdEnemy = 0;
+		
+		instance_destroy();
 		
 		
 	break;

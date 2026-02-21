@@ -20,10 +20,16 @@ facing = 1;
 
 
 enum EnemyState{
-	PATROL,
+	PATROL, 
 	CHASE,
 	ATTACK,
 	DEATH
 }
 
 state = EnemyState.PATROL;
+
+function checkDeath(){
+	if (hpEnemy <= 0){
+		state = EnemyState.DEATH;	
+	}
+}
