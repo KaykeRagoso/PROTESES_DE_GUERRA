@@ -1,5 +1,5 @@
 // Trocar Estado quando o player tiver perto do inimigo
-if (instance_exists(obj_Player)){
+if (instance_exists(obj_Player) && state != EnemyState.ATTACK && state != EnemyState.DEATH){
 	
 	var distPlayer = point_distance(x,y,obj_Player.x, obj_Player.y);
 	
@@ -13,7 +13,7 @@ if (instance_exists(obj_Player)){
 }
 
 
-// State Machine
+// State machine
 switch (state) {
 
 	case EnemyState.PATROL:
@@ -33,14 +33,18 @@ switch (state) {
 	
 	case EnemyState.CHASE:
 		
-		// Entrar em modo perseguidor
 		if (target != noone){
 			
 			facing = sign(target.x - x);
-			//Aumentar a velocidade quando entra nesse modo
+			
+			// Persegue mais rápido
 			hspdEnemy = spdEnemyMax * facing;
 			
-			if (abs(target.x - x) < 20 && abs(target.y - y) < 16){
+			// Distância ideal para ranged
+			if (abs(target.x - x) > 40 &&
+				abs(target.x - x) < 160 &&
+				abs(target.y - y) < 32){
+					
 				state = EnemyState.ATTACK;
 			}
 		}
@@ -49,39 +53,58 @@ switch (state) {
 	
 	
 	case EnemyState.ATTACK:
+		
 		hspdEnemy = 0;
-		// Ataca quando cooldown é 0
-		if (ataque_cool <= 0) {
-			ataque = true;
-			ataque_cool = ataque_delay;
-
+		
+		if (target != noone){
+			facing = sign(target.x - x);
 		}
 		
-		state = EnemyState.CHASE;
+		ataque_cool++;
+		
+		// Momento do disparo
+		if (ataque_cool >= ataque_delay && !ataque){
+			
+			var bullet = instance_create_layer(x + (facing * 12), y, "Instances", obj_Bullet);
+			bullet.direction = facing == 1 ? 0 : 180;
+			bullet.speed = 6;
+			
+			ataque = true;
+		}
+		
+		// Final do ataque
+		if (ataque_cool >= ataque_delay){
+			
+			ataque_cool = 0;
+			ataque = false;
+			state = EnemyState.CHASE;
+		}
+		
+	break;
+	
+	
+	case EnemyState.DEATH:
+		
+		hspdEnemy = 0;
+		vspdEnemy = 0;
+		
 		
 	break;
 }
 
 
-// Sistema de Cooldown
-if (ataque_cool > 0) {
-	ataque_cool--;
-	ataque = false;
-}
-
-
 // GRAVIDADE
-vspdEnemy += 0.35;
+vspdEnemy += grv;
 
-if (vspdEnemy > 6) {
-	vspdEnemy = 6;
+if (vspdEnemy > maxFall){
+	vspdEnemy = maxFall;
 }
 
 
 // COLISÃO HORIZONTAL
-if (place_meeting(x + hspdEnemy, y, obj_Block)) {
+if (place_meeting(x + hspdEnemy, y, obj_Block)){
 	
-	while (!place_meeting(x + sign(hspdEnemy), y, obj_Block)) {
+	while (!place_meeting(x + sign(hspdEnemy), y, obj_Block)){
 		x += sign(hspdEnemy);
 	}
 	
@@ -93,9 +116,9 @@ x += hspdEnemy;
 
 
 // COLISÃO VERTICAL
-if (place_meeting(x, y + vspdEnemy, obj_Block)) {
+if (place_meeting(x, y + vspdEnemy, obj_Block)){
 	
-	while (!place_meeting(x, y + sign(vspdEnemy), obj_Block)) {
+	while (!place_meeting(x, y + sign(vspdEnemy), obj_Block)){
 		y += sign(vspdEnemy);
 	}
 	

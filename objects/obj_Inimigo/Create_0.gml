@@ -2,6 +2,8 @@ spdEnemy = 1;
 spdEnemyMax = spdEnemy + 1;
 hspdEnemy = 0;
 vspdEnemy = 0;
+grv = 0.35;
+maxFall = 6;
 
 hpEnemy = 3;
 
@@ -10,7 +12,7 @@ patrol_right = x + 64;
 
 ataque = false;
 ataque_cool = 0;
-ataque_delay = 30;
+ataque_delay = 15;
 
 target = noone;
 facing = 1;
