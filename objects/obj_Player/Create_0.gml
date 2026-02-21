@@ -1,18 +1,18 @@
-// Velocidades
-hsp = 0; // Velocidade Horizontal
-vsp = 0; // Velocidade Vertical
-grv = 0.4; // Gravidade
-walksp = 4; // Velocidade de caminhada
-jump_force = -9; // Força do pulo
+//imput
+hsp = 0; 
+vsp = 0; 
+grv = 0.4; //gravidade
+walksp = 4; //velocidade de caminhada
+jump_force = -9;
 
-// Dash
+//dash
 can_dash = true;
 dashing = false;
-dash_duration = 10; // Frames
+dash_duration = 10; //frames
 dash_timer = 0;
 dash_sp = 10;
 
-// Wall Jump
+//wall Jump
 wall_speed_limit = 2;
-on_wall = 0; // 1 para direita, -1 para esquerda
-control_lock = 0; // Timer para travar o input horizontal
+on_wall = 0;
+control_lock = 0; //timer para travar o input horizontal

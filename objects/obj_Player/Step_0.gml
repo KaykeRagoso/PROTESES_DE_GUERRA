@@ -7,7 +7,7 @@ var key_jump  = keyboard_check_pressed(vk_space) || keyboard_check(vk_up);
 var grounded = place_meeting(x, y + 1, obj_Block);
 var on_wall  = place_meeting(x + 1, y, obj_Block) - place_meeting(x - 1, y, obj_Block);
 
-//controle de mov com trava do wall jump)
+//controle de mov com trava do wall jump
 if (control_lock > 0) 
 {
     control_lock -= 1; //reduz o tempo de trava
@@ -18,7 +18,7 @@ else
     var move = key_right - key_left;
     hsp = move * walksp;
     
-    // Inverte o sprite conforme a direção mas acho que nn vai usar ne o sprite tem que ter dois lado
+    //inverte o sprite conforme a direção mas acho que nn vai usar ne o sprite tem que ter dois lado
     if (move != 0) image_xscale = move;
 }
 
@@ -27,22 +27,22 @@ vsp += grv;
 
 if (on_wall != 0 && !grounded) 
 {
-    if (vsp > 0) vsp = min(vsp, wall_speed_limit); // Desliza devagar
+    if (vsp > 0) vsp = min(vsp, wall_speed_limit); //desliza devagar
 }
 
 //logica do pulo
 if (grounded) 
 {
-    control_lock = 0; // Reseta trava ao tocar o chão
+    control_lock = 0; //reseta trava ao tocar o chão
     if (key_jump) vsp = jump_force;
 } 
 else if (on_wall != 0 && key_jump) 
 {
     //o pulo na parede
     vsp = jump_force;
-    hsp = -on_wall * (walksp * 2.5); // Joga pro lado oposto com força
-    control_lock = 12;            // Trava o input por 12 frames
-    image_xscale = -on_wall;       // Vira o personagem para o lado oposto
+    hsp = -on_wall * (walksp * 2.5); //joga pro lado oposto com força
+    control_lock = 12;            //trava o input por 12 frames
+    image_xscale = -on_wall;       // Vira o personagem para o lado oposto(n vai precisar eu acho)
 }
 
 // 6. colisões

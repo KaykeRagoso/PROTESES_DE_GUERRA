@@ -1,9 +1,15 @@
 {
-  "FolderOrderSettings":[],
+  "FolderOrderSettings":[
+    {"name":"vida","order":7,"path":"folders/vida.yy",},
+    {"name":"gameover","order":3,"path":"folders/vida/gameover.yy",},
+    {"name":"vida","order":4,"path":"folders/vida/vida.yy",},
+  ],
   "ResourceOrderSettings":[
     {"name":"obj_Block","order":6,"path":"objects/obj_Block/obj_Block.yy",},
     {"name":"obj_Inimigo","order":4,"path":"objects/obj_Inimigo/obj_Inimigo.yy",},
+    {"name":"obj_life","order":1,"path":"objects/obj_life/obj_life.yy",},
     {"name":"obj_Player","order":2,"path":"objects/obj_Player/obj_Player.yy",},
+    {"name":"spr_borda_vida","order":2,"path":"sprites/spr_borda_vida/spr_borda_vida.yy",},
     {"name":"sprt_Block","order":5,"path":"sprites/sprt_Block/sprt_Block.yy",},
     {"name":"sprt_Inimigo","order":3,"path":"sprites/sprt_Inimigo/sprt_Inimigo.yy",},
     {"name":"sprt_Player","order":1,"path":"sprites/sprt_Player/sprt_Player.yy",},
