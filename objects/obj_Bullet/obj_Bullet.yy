@@ -1,13 +1,11 @@
 {
   "$GMObject":"",
-  "%Name":"obj_Inimigo",
+  "%Name":"obj_Bullet",
   "eventList":[
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":{"name":"obj_Block","path":"objects/obj_Block/obj_Block.yy",},"eventNum":0,"eventType":4,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_Inimigo",
+  "name":"obj_Bullet",
   "overriddenProperties":[],
   "parent":{
     "name":"NoneJam12",
@@ -32,8 +30,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"sprt_Inimigo",
-    "path":"sprites/sprt_Inimigo/sprt_Inimigo.yy",
+    "name":"sprt_Bullet",
+    "path":"sprites/sprt_Bullet/sprt_Bullet.yy",
   },
   "spriteMaskId":null,
   "visible":true,

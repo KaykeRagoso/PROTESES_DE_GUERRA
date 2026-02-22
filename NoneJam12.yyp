@@ -34,6 +34,7 @@
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
     {"id":{"name":"spr_borda_vida","path":"sprites/spr_borda_vida/spr_borda_vida.yy",},},
     {"id":{"name":"sprt_Block","path":"sprites/sprt_Block/sprt_Block.yy",},},
+    {"id":{"name":"sprt_Bullet","path":"sprites/sprt_Bullet/sprt_Bullet.yy",},},
     {"id":{"name":"sprt_Inimigo","path":"sprites/sprt_Inimigo/sprt_Inimigo.yy",},},
     {"id":{"name":"sprt_Player","path":"sprites/sprt_Player/sprt_Player.yy",},},
   ],
