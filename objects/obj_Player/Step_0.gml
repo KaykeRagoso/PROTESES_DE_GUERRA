@@ -40,9 +40,16 @@ else if (on_wall != 0 && key_jump)
 {
     //o pulo na parede
     vsp = jump_force;
+	audio_play_sound(snd_wall_jump, 10, false);
+	//particulas pulo
+        //determina se a poeira sai para a esquerda ou direita
+        var lado_parede = place_meeting(x + 1, y, obj_Block) ? 1 : -1;
+        
+        
+        part_particles_create(part_sys, x + (10 * lado_parede), y, part_dust, 10);
     hsp = -on_wall * (walksp * 2.5); //joga pro lado oposto com força
     control_lock = 12;            //trava o input por 12 frames
-    image_xscale = -on_wall;       // Vira o personagem para o lado oposto(n vai precisar eu acho)
+    image_xscale = -on_wall;       //vira o personagem para o lado oposto(n vai precisar eu acho)
 }
 
 // 6. colisões

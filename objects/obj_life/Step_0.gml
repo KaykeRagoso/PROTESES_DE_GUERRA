@@ -7,9 +7,15 @@ if (vida_delay > global.vida_atual) {
 //exemplo de quando o player toma dano
 
 if (keyboard_check_pressed(vk_f1)){ {
+	audio_play_sound(snd_hitplayer,1,false)
     global.vida_atual -= 10;
     instance_create_layer(0, 0, "Instances", obj_flash_dano);
 }
+}
+if (keyboard_check_pressed(vk_f2)){ 
+	audio_play_sound(snd_hitplayer,1,false)
+    global.vida_atual -= 1;
+    instance_create_layer(0, 0, "Instances", obj_flash_dano);
 }
 //garantir que a vida não fique negativa
 global.vida_atual = clamp(global.vida_atual, 0, global.vida_max);

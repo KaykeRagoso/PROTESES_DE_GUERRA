@@ -1,9 +1,9 @@
 var gx = 50; //posição x na tela
-var gy = 700; //posição y na tela
+var gy = 47; //posição y na tela
 
 //desenhando o Fundo da Barra
 draw_set_color(c_black);
-draw_rectangle(gx, gy, gx + barra_largura, gy + barra_altura, false);
+draw_rectangle(gx, gy, gx + barra_largura + 2, gy + barra_altura, false);
 
 //desenha a Barra de deley branca
 // ela fica por baixo da barra principal
