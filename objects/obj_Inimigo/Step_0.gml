@@ -168,4 +168,5 @@ if (place_meeting(x, y + vspdEnemy, obj_Block)){
 y += vspdEnemy;
 
 // Trocar Xscale automatico
-image_xscale = facing;
+if (facing == -1) image_xscale = -1;
+if (facing ==  1) image_xscale =  1;

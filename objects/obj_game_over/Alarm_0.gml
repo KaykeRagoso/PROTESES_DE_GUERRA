@@ -1,0 +1,1 @@
+pode_reiniciar = true;
