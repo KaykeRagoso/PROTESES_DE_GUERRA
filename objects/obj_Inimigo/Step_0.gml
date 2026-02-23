@@ -43,78 +43,66 @@ switch (state)
     break;
 
 
-    case EnemyState.CHASE:
-        if (target != noone)
-        {
-            var target_center = (target.bbox_left + target.bbox_right) * 0.5;
-            var dx = target_center - x;
+	case EnemyState.CHASE:
+	    if (target != noone)
+	    {
+	        // centro real do player
+	        var target_center = (target.bbox_left + target.bbox_right) * 0.5;
+	        var dx = target_center - x;
 
-            // Dead zone horizontal
-            if (abs(dx) > 4) {
-                move_dir = sign(dx);
-            }
+	        // dead zone para não ficar virando freneticamente
+	        if (abs(dx) > 4) {
+	            facing = sign(dx);  // só altera visual
+	        }
 
-            hspdEnemy = spdEnemyMax * move_dir;
+	        // movimento real
+	        hspdEnemy = spdEnemyMax * sign(dx);
 
-            // Distância ideal para atacar o playter
-            if (abs(dx) > 40 &&
-                abs(dx) < 160 &&
-                abs(target.y - y) < 32)
-            {
-                state = EnemyState.ATTACK;
-            }
-        }
-    break;
+	        // transição para ATTACK
+	        if (abs(dx) > 40 &&
+	            abs(dx) < 160 &&
+	            abs(target.y - y) < 32)
+	        {
+	            state = EnemyState.ATTACK;
+	        }
+	    }
+	break;
 
 
-    case EnemyState.ATTACK:
-        move_dir = 0;
-        hspdEnemy = 0;
+	case EnemyState.ATTACK:
+	    hspdEnemy = 0;
 
-        if (target != noone)
-        {
-            var target_center = (target.bbox_left + target.bbox_right) * 0.5;
-            var dx = target_center - x;
+	    if (target != noone) {
+	        // Pega o centro do player
+	        var target_center = (target.bbox_left + target.bbox_right) * 0.5;
+	        var dx = target_center - x;
 
-            if (abs(dx) > 4) {
-                facing = sign(dx);
-            }
-        }
+	        // Atualiza o facing sempre para o lado do player
+	        facing = sign(dx); 
+	    }
 
-        ataque_cool++;
+	    if (!ataque) {
+	        // Dispara o projétil
+	        var bullet = instance_create_layer(x + (facing * 12), y, "Instances", obj_Bullet);
+	        bullet.direction = (facing == 1) ? 0 : 180;
+	        bullet.speed = 6;
 
-        if (ataque_cool >= ataque_delay && !ataque)
-        {
-            var bullet = instance_create_layer(
-                x + (facing * 12),
-                y,
-                "Instances",
-                obj_Bullet
-            );
-
-            bullet.direction = (facing == 1) ? 0 : 180;
-            bullet.speed = 6;
-
-            aplicarRecoil(2);
-            ataque = true;
-        }
-
-        if (ataque_cool >= ataque_delay)
-        {
-            ataque_cool = 0;
-            ataque = false;
-
-            if (target != noone &&
-                point_distance(x, y, target.x, target.y) <= 200)
-            {
-                state = EnemyState.CHASE;
-            }
-            else
-            {
-                state = EnemyState.PATROL;
-            }
-        }
-    break;
+	        aplicarRecoil(2);
+	        ataque = true;
+	        ataque_cool = 0;
+	    } else {
+	        // Incrementa cooldown
+	        ataque_cool++;
+	        if (ataque_cool >= ataque_delay) {
+	            ataque = false;
+	            // Define próximo estado
+	            if (target != noone && point_distance(x, y, target.x, target.y) <= 200)
+	                state = EnemyState.CHASE;
+	            else
+	                state = EnemyState.PATROL;
+	        }
+	    }
+	break;
 }
 
 
@@ -165,6 +153,7 @@ if (place_meeting(x, y + vspdEnemy, obj_Block))
 }
 
 y += vspdEnemy;
+
 
 // SPRITE FLIP
 if (facing == -1) image_xscale = -1;
