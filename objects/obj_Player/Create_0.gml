@@ -19,7 +19,6 @@ wall_speed_limit = 3;
 on_wall = 0;
 control_lock = 0;
 
-<<<<<<< HEAD
 
 // Criar o Sistema
 part_sys = part_system_create();
@@ -34,7 +33,7 @@ part_type_speed(part_dust, 1, 3, 0, 0);
 part_type_direction(part_dust, 0, 360, 0, 0);
 part_type_life(part_dust, 10, 20);
 
-=======
+
 enum PlayerState {
     IDLE,
     RUN,
@@ -46,4 +45,3 @@ enum PlayerState {
 }
 
 state = PlayerState.IDLE;
->>>>>>> 750748dd30c450b9b68b605f0abf1b45dd7d5b04
