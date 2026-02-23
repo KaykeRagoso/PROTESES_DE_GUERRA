@@ -47,3 +47,4 @@ enum PlayerState {
 
 state = PlayerState.IDLE;
 
+fpsGame = game_get_speed(gamespeed_fps);

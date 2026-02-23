@@ -88,6 +88,7 @@
     {"id":{"name":"sprt_PlayerJump","path":"sprites/sprt_PlayerJump/sprt_PlayerJump.yy",},},
     {"id":{"name":"sprt_PlayerJumpFall","path":"sprites/sprt_PlayerJumpFall/sprt_PlayerJumpFall.yy",},},
     {"id":{"name":"sprt_PlayerJumpHold","path":"sprites/sprt_PlayerJumpHold/sprt_PlayerJumpHold.yy",},},
+    {"id":{"name":"sprt_PlayerMask","path":"sprites/sprt_PlayerMask/sprt_PlayerMask.yy",},},
     {"id":{"name":"sprt_PlayerRun","path":"sprites/sprt_PlayerRun/sprt_PlayerRun.yy",},},
     {"id":{"name":"sprt_TiroFraco","path":"sprites/sprt_TiroFraco/sprt_TiroFraco.yy",},},
     {"id":{"name":"sprt_TiroFraco2","path":"sprites/sprt_TiroFraco2/sprt_TiroFraco2.yy",},},

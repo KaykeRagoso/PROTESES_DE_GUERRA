@@ -1,15 +1,14 @@
-#region Input
+#region INPUT
 var key_left  = keyboard_check(ord("A")) || keyboard_check(vk_left);
 var key_right = keyboard_check(ord("D")) || keyboard_check(vk_right);
-var key_jump  = keyboard_check_pressed(vk_space) 
-             || keyboard_check_pressed(vk_up);
+var key_jump  = keyboard_check_pressed(vk_space) || keyboard_check_pressed(vk_up);
 var key_dash  = keyboard_check_pressed(vk_shift);
 
 var move = key_right - key_left;
 #endregion
 
-#region Detecções
-// DETECÇÕES 
+
+#region DETECÇÕES
 var grounded = place_meeting(x, y + 1, obj_Block);
 
 var wall_r = place_meeting(x + 1, y, obj_Block);
@@ -20,8 +19,9 @@ if (wall_r) on_wall = 1;
 if (wall_l) on_wall = -1;
 #endregion
 
-#region State Machine
-// STATE MACHINE
+
+#region STATE MACHINE
+
 switch (state)
 {
     case PlayerState.IDLE:
@@ -31,14 +31,11 @@ switch (state)
         if (move != 0)
         {
             facing = move;
-            image_xscale = facing;
             state = PlayerState.RUN;
         }
         
         if (!grounded)
-        {
             state = PlayerState.AIR;
-        }
         
         if (key_jump && grounded)
         {
@@ -47,9 +44,7 @@ switch (state)
         }
         
         if (key_dash && can_dash)
-        {
             state = PlayerState.DASH;
-        }
         
     break;
     
@@ -59,30 +54,21 @@ switch (state)
         hsp = move * walksp;
         
         if (move != 0)
-        {
             facing = move;
-            image_xscale = facing;
-        }
         else
-        {
             state = PlayerState.IDLE;
-        }
         
         if (!grounded)
-        {
             state = PlayerState.AIR;
-        }
         
-        if (key_jump)
+        if (key_jump && grounded)
         {
             vsp = jump_force;
             state = PlayerState.AIR;
         }
         
         if (key_dash && can_dash)
-        {
             state = PlayerState.DASH;
-        }
         
     break;
     
@@ -100,19 +86,13 @@ switch (state)
         else
         {
             hsp = move * walksp;
-            
             if (move != 0)
-            {
                 facing = move;
-                image_xscale = facing;
-            }
         }
         
         // Wall slide
         if (on_wall != 0 && vsp > 0)
-        {
             vsp = min(vsp, wall_speed_limit);
-        }
         
         // Wall jump
         if (on_wall != 0 && key_jump)
@@ -120,8 +100,12 @@ switch (state)
             vsp = jump_force;
             hsp = -on_wall * walksp * 2.5;
             facing = -on_wall;
-            image_xscale = facing;
             control_lock = 12;
+            
+            audio_play_sound(snd_wall_jump, 10, false);
+            
+            var lado_parede = on_wall;
+            part_particles_create(part_sys, x + (10 * lado_parede), y, part_dust, 10);
         }
         
         if (grounded)
@@ -131,9 +115,7 @@ switch (state)
         }
         
         if (key_dash && can_dash)
-        {
             state = PlayerState.DASH;
-        }
         
     break;
     
@@ -152,66 +134,86 @@ switch (state)
         dash_timer--;
         
         if (dash_timer <= 0)
-        {
             state = PlayerState.AIR;
-        }
         
     break;
 }
+
 #endregion
 
-#region Colisões
 
-
-if (on_wall != 0 && !grounded) 
-{
-    if (vsp > 0) vsp = min(vsp, wall_speed_limit); //desliza devagar
-}
-
-//logica do pulo
-if (grounded) 
-{
-    control_lock = 0; //reseta trava ao tocar o chão
-    if (key_jump) vsp = jump_force;
-} 
-else if (on_wall != 0 && key_jump) 
-{
-    //o pulo na parede
-    vsp = jump_force;
-	audio_play_sound(snd_wall_jump, 10, false);
-	//particulas pulo
-        //determina se a poeira sai para a esquerda ou direita
-        var lado_parede = place_meeting(x + 1, y, obj_Block) ? 1 : -1;
-        
-        
-        part_particles_create(part_sys, x + (10 * lado_parede), y, part_dust, 10);
-    hsp = -on_wall * (walksp * 2.5); //joga pro lado oposto com força
-    control_lock = 12;            //trava o input por 12 frames
-    image_xscale = -on_wall;       //vira o personagem para o lado oposto(n vai precisar eu acho)
-}
-
-// 6. colisões
+#region COLISÕES
 
 // Horizontal
-
-if (place_meeting(x + hsp, y, obj_Block)) {
-    while (!place_meeting(x + sign(hsp), y, obj_Block)) {
+if (place_meeting(x + hsp, y, obj_Block))
+{
+    while (!place_meeting(x + sign(hsp), y, obj_Block))
         x += sign(hsp);
-    }
+    
     hsp = 0;
 }
 x += hsp;
 
+
 // Vertical
-if (place_meeting(x, y + vsp, obj_Block)) {
-    while (!place_meeting(x, y + sign(vsp), obj_Block)) {
+if (place_meeting(x, y + vsp, obj_Block))
+{
+    while (!place_meeting(x, y + sign(vsp), obj_Block))
         y += sign(vsp);
-    }
+    
     vsp = 0;
 }
 y += vsp;
 
-/// cara deiei tudo escrito no codigo pra ajudar vc caso vc precise mecher em alguma ;)
-
 #endregion
 
+
+#region Sprites
+// Direção visual centralizada
+if (facing != 0)
+    image_xscale = facing;
+switch (state)
+{
+    case PlayerState.IDLE:
+        sprite_index = sprt_PlayerIdle;
+        image_speed = image_number / 2;
+    break;
+    
+    case PlayerState.RUN:
+        sprite_index = sprt_PlayerRun;
+        image_speed = image_number / 3;
+    break;
+    
+    case PlayerState.AIR:
+	
+        
+        if (on_wall != 0 && vsp > 0)
+        {
+            sprite_index = sprt_PlayerJumpHold;
+            image_speed = image_number / 1;
+			image_xscale = -on_wall;
+
+        }
+        else if (vsp < 0)
+        {
+            sprite_index = sprt_PlayerJump;
+            image_speed = image_number / 3.5;
+			image_xscale = facing;
+			image_index = 0;
+        }
+        else
+        {
+            sprite_index = sprt_PlayerFall;
+            image_speed = image_number / 2.5;
+			image_xscale = facing;
+        }
+        
+    break;
+    
+    case PlayerState.DASH:
+        sprite_index = sprt_PlayerDash;
+        image_speed = image_number / dash_duration;
+    break;
+}
+
+#endregion

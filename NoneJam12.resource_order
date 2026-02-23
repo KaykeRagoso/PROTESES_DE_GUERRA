@@ -40,6 +40,7 @@
     {"name":"sprt_PlayerJump","order":6,"path":"sprites/sprt_PlayerJump/sprt_PlayerJump.yy",},
     {"name":"sprt_PlayerJumpFall","order":7,"path":"sprites/sprt_PlayerJumpFall/sprt_PlayerJumpFall.yy",},
     {"name":"sprt_PlayerJumpHold","order":10,"path":"sprites/sprt_PlayerJumpHold/sprt_PlayerJumpHold.yy",},
+    {"name":"sprt_PlayerMask","order":11,"path":"sprites/sprt_PlayerMask/sprt_PlayerMask.yy",},
     {"name":"sprt_PlayerRun","order":8,"path":"sprites/sprt_PlayerRun/sprt_PlayerRun.yy",},
     {"name":"sprt_TiroFraco","order":1,"path":"sprites/sprt_TiroFraco/sprt_TiroFraco.yy",},
     {"name":"sprt_TiroFraco2","order":2,"path":"sprites/sprt_TiroFraco2/sprt_TiroFraco2.yy",},
