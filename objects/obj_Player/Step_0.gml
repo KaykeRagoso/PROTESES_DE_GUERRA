@@ -162,7 +162,7 @@ switch (state)
 
 #region Colisões
 
-<<<<<<< HEAD
+
 if (on_wall != 0 && !grounded) 
 {
     if (vsp > 0) vsp = min(vsp, wall_speed_limit); //desliza devagar
@@ -191,9 +191,9 @@ else if (on_wall != 0 && key_jump)
 }
 
 // 6. colisões
-=======
+
 // Horizontal
->>>>>>> 750748dd30c450b9b68b605f0abf1b45dd7d5b04
+
 if (place_meeting(x + hsp, y, obj_Block)) {
     while (!place_meeting(x + sign(hsp), y, obj_Block)) {
         x += sign(hsp);
@@ -210,11 +210,11 @@ if (place_meeting(x, y + vsp, obj_Block)) {
     vsp = 0;
 }
 y += vsp;
-<<<<<<< HEAD
+
 
 	
 
 /// cara deiei tudo escrito no codigo pra ajudar vc caso vc precise mecher em alguma ;)
-=======
+
 #endregion
->>>>>>> 750748dd30c450b9b68b605f0abf1b45dd7d5b04
+
