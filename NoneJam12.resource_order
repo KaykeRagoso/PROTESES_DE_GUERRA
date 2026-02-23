@@ -1,12 +1,13 @@
 {
   "FolderOrderSettings":[
+    {"name":"Tiros","order":9,"path":"folders/Tiros.yy",},
+    {"name":"SpritesPlayer","order":8,"path":"folders/SpritesPlayer.yy",},
     {"name":"vida","order":7,"path":"folders/vida.yy",},
     {"name":"gameover","order":3,"path":"folders/vida/gameover.yy",},
     {"name":"vida","order":4,"path":"folders/vida/vida.yy",},
   ],
   "ResourceOrderSettings":[
     {"name":"obj_Block","order":6,"path":"objects/obj_Block/obj_Block.yy",},
-    {"name":"obj_Bullet","order":8,"path":"objects/obj_Bullet/obj_Bullet.yy",},
     {"name":"obj_Inimigo","order":4,"path":"objects/obj_Inimigo/obj_Inimigo.yy",},
     {"name":"obj_life","order":1,"path":"objects/obj_life/obj_life.yy",},
     {"name":"obj_Player","order":2,"path":"objects/obj_Player/obj_Player.yy",},
@@ -15,5 +16,16 @@
     {"name":"sprt_Bullet","order":7,"path":"sprites/sprt_Bullet/sprt_Bullet.yy",},
     {"name":"sprt_Inimigo","order":3,"path":"sprites/sprt_Inimigo/sprt_Inimigo.yy",},
     {"name":"sprt_Player","order":1,"path":"sprites/sprt_Player/sprt_Player.yy",},
+    {"name":"sprt_PlayerAtaque1","order":5,"path":"sprites/sprt_PlayerAtaque1/sprt_PlayerAtaque1.yy",},
+    {"name":"sprt_PlayerAtaque2","order":6,"path":"sprites/sprt_PlayerAtaque2/sprt_PlayerAtaque2.yy",},
+    {"name":"sprt_PlayerAtirou","order":4,"path":"sprites/sprt_PlayerAtirou/sprt_PlayerAtirou.yy",},
+    {"name":"sprt_PlayerDash","order":3,"path":"sprites/sprt_PlayerDash/sprt_PlayerDash.yy",},
+    {"name":"sprt_PlayerFall","order":7,"path":"sprites/sprt_PlayerFall/sprt_PlayerFall.yy",},
+    {"name":"sprt_PlayerHoldTiro","order":8,"path":"sprites/sprt_PlayerHoldTiro/sprt_PlayerHoldTiro.yy",},
+    {"name":"sprt_PlayerJump","order":1,"path":"sprites/sprt_PlayerJump/sprt_PlayerJump.yy",},
+    {"name":"sprt_PlayerJumpfall","order":9,"path":"sprites/sprt_PlayerJumpfall/sprt_PlayerJumpfall.yy",},
+    {"name":"sprt_PlayerRun","order":10,"path":"sprites/sprt_PlayerRun/sprt_PlayerRun.yy",},
+    {"name":"sprt_PlayerTiroFraco2","order":1,"path":"sprites/sprt_PlayerTiroFraco2/sprt_PlayerTiroFraco2.yy",},
+    {"name":"sprt_PlayerWallJump","order":2,"path":"sprites/sprt_PlayerWallJump/sprt_PlayerWallJump.yy",},
   ],
 }
