@@ -6,7 +6,7 @@ if (state == EnemyState.DEATH) {
 }
 
 
-// --- DETECÇÃO ---
+#region Detecção
 if (instance_exists(obj_Player)) {
 
     var distPlayer = point_distance(x, y, obj_Player.x, obj_Player.y);
@@ -35,9 +35,9 @@ if (instance_exists(obj_Player)) {
         }
     }
 }
+#endregion
 
-
-// --- STATE MACHINE ---
+#region State Machine
 switch (state)
 {
 
@@ -144,10 +144,9 @@ switch (state)
 
     break;
 }
+#endregion
 
-
-
-// --- RECOIL ---
+#region Recoil
 if (recoil_force != 0)
 {
     hspdEnemy = recoil_force;
@@ -157,16 +156,16 @@ if (recoil_force != 0)
     if (abs(recoil_force) < 0.05)
         recoil_force = 0;
 }
+#endregion
 
-
-// --- GRAVIDADE ---
+#region Gravidade
 vspdEnemy += grv;
 
 if (vspdEnemy > maxFall)
     vspdEnemy = maxFall;
+#endregion
 
-
-// --- COLISÃO HORIZONTAL ---
+#region Colisão
 if (place_meeting(x + hspdEnemy, y, obj_Block))
 {
     while (!place_meeting(x + sign(hspdEnemy), y, obj_Block))
@@ -178,7 +177,6 @@ if (place_meeting(x + hspdEnemy, y, obj_Block))
 x += hspdEnemy;
 
 
-// --- COLISÃO VERTICAL ---
 if (place_meeting(x, y + vspdEnemy, obj_Block))
 {
     while (!place_meeting(x, y + sign(vspdEnemy), obj_Block))
@@ -188,7 +186,8 @@ if (place_meeting(x, y + vspdEnemy, obj_Block))
 }
 
 y += vspdEnemy;
+#endregion
 
-
-// --- VISUAL ---
+#region Troca de Sprite
 image_xscale = facing;
+#endregion
