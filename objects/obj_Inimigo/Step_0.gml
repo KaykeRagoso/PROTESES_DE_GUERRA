@@ -30,7 +30,7 @@ if (instance_exists(obj_Player)) {
     else if (target != noone) {
         tempo_perda_alvo++;
 
-        if (tempo_perda_alvo > 60) {
+        if (tempo_perda_alvo > 90) {
             target = noone;
         }
     }

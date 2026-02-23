@@ -19,8 +19,6 @@ wall_speed_limit = 3;
 on_wall = 0;
 control_lock = 0;
 
-
-
 // Criar o Sistema
 part_sys = part_system_create();
 
@@ -47,3 +45,4 @@ enum PlayerState {
 
 state = PlayerState.IDLE;
 
+fpsGame = game_get_speed(gamespeed_fps);
