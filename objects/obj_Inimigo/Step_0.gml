@@ -35,17 +35,19 @@ switch (state) {
 	case EnemyState.CHASE:
 		
 		if (target != noone){
+			var _dir = sign(target.x - x);
 			
-			facing = sign(target.x - x);
+			if (_dir != 0) {
+			    facing = _dir;
+			}
 			
 			// Persegue mais rápido
 			hspdEnemy = spdEnemyMax * facing;
 			
 			// Distância ideal para ranged
-			if (abs(target.x - x) > 40 &&
-				abs(target.x - x) < 160 &&
-				abs(target.y - y) < 32){
-					
+			var dx = abs(target.x - x);
+			var dy = abs(target.y - y);
+			if (dx < 160 && dy < 32){
 				state = EnemyState.ATTACK;
 			}
 		}
@@ -137,4 +139,5 @@ if (place_meeting(x, y + vspdEnemy, obj_Block)){
 y += vspdEnemy;
 
 // Trocar Xscale automatico
-image_xscale = facing;
+if (facing == -1) image_xscale = -1;
+if (facing ==  1) image_xscale =  1;
