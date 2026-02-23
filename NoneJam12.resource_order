@@ -10,7 +10,11 @@
     {"name":"fnt_hud_vida_porc","order":4,"path":"fonts/fnt_hud_vida_porc/fnt_hud_vida_porc.yy",},
     {"name":"obj_Block","order":6,"path":"objects/obj_Block/obj_Block.yy",},
     {"name":"obj_Bullet","order":8,"path":"objects/obj_Bullet/obj_Bullet.yy",},
+<<<<<<< HEAD
     {"name":"obj_hud_pocao_vida","order":1,"path":"objects/obj_hud_pocao_vida/obj_hud_pocao_vida.yy",},
+=======
+    {"name":"obj_Camera","order":9,"path":"objects/obj_Camera/obj_Camera.yy",},
+>>>>>>> 750748dd30c450b9b68b605f0abf1b45dd7d5b04
     {"name":"obj_Inimigo","order":4,"path":"objects/obj_Inimigo/obj_Inimigo.yy",},
     {"name":"obj_life","order":1,"path":"objects/obj_life/obj_life.yy",},
     {"name":"obj_Player","order":2,"path":"objects/obj_Player/obj_Player.yy",},
