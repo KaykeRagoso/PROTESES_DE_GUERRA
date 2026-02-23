@@ -21,92 +21,106 @@ if (instance_exists(obj_Player) && state != EnemyState.ATTACK && state != EnemyS
 
 
 // State machine
-switch (state) {
+switch (state)
+{
+    case EnemyState.PATROL:
 
-	case EnemyState.PATROL:
-		
-	    hspdEnemy = spdEnemy * facing;
-    
-	    // Não cair da plataforma
-	    var frontX = x + (facing * 8);
-	    var frontY = y + 16;
-    
-	    if (!place_meeting(frontX, frontY, obj_Block)) {
-	        facing *= -1;
+        move_dir = facing;
+
+        var frontX = x + (facing * 8);
+        var frontY = y + 16;
+
+        if (!place_meeting(frontX, frontY, obj_Block) ||
+            place_meeting(x + facing, y, obj_Block))
+        {
+            move_dir = -facing;
+        }
+
+        hspdEnemy = spdEnemy * move_dir;
+
+    break;
+
+
+    case EnemyState.CHASE:
+
+	    if (target != noone)
+	    {
+	        // Centro real do player (mais estável que usar X hein Luiz)
+	        var target_center = (target.bbox_left + target.bbox_right) * 0.5;
+	        var dx = target_center - x;
+
+	        // Dead zone horizontal
+	        if (abs(dx) > 4)
+	        {
+	            move_dir = sign(dx);
+	        }
+
+	        hspdEnemy = spdEnemyMax * move_dir;
+
+	        if (abs(dx) > 40 &&
+	            abs(dx) < 160 &&
+	            abs(target.y - y) < 32)
+	        {
+	            state = EnemyState.ATTACK;
+	        }
 	    }
-    
-	    // Não atravessar parede frontal
-	    if (place_meeting(x + facing, y, obj_Block)) {
-	        facing *= -1;
+
+    break;
+
+
+    case EnemyState.ATTACK:
+
+	    move_dir = 0;
+	    hspdEnemy = 0;
+
+	    if (target != noone)
+	    {
+	        var target_center = (target.bbox_left + target.bbox_right) * 0.5;
+	        var dx = target_center - x;
+
+	        if (abs(dx) > 4)
+	        {
+	            facing = sign(dx);
+	        }
 	    }
-    
-		
-	break;
-	
-	
-	case EnemyState.CHASE:
-		
-		if (target != noone){
-			
-			facing = sign(target.x - x);
-			
-			// Persegue mais rápido
-			hspdEnemy = spdEnemyMax * facing;
-			
-			// Distância ideal para ranged
-			if (abs(target.x - x) > 40 &&
-				abs(target.x - x) < 160 &&
-				abs(target.y - y) < 32){
-					
-				state = EnemyState.ATTACK;
-			}
-		}
-		
-	break;
-	
-	
-	case EnemyState.ATTACK:
-		
-		hspdEnemy = 0;
-		
-		if (target != noone){
-			facing = sign(target.x - x);
-		}
-		
-		ataque_cool++;
-		
-		// Momento do disparo
-		if (ataque_cool >= ataque_delay && !ataque){
-			
-			var bullet = instance_create_layer(x + (facing * 12), y, "Instances", obj_Bullet);
-			bullet.direction = facing == 1 ? 0 : 180;
-			bullet.speed = 6;
-			
-			aplicarRecoil(2)
-			
-			ataque = true;
-		}
-		
-		// Final do ataque
-		if (ataque_cool >= ataque_delay){
-		    ataque_cool = 0;
-		    ataque = false;
-    
-		    // Só volta para CHASE se ainda estiver dentro do range
-		    if (target != noone && point_distance(x,y,target.x,target.y) <= 200){
-		        state = EnemyState.CHASE;
-		    } else {
-		        state = EnemyState.PATROL;
-		    }
-		}
-		
-	break;
-	
-	
-	case EnemyState.DEATH:		
-		instance_destroy();		
-	break;
+
+	    ataque_cool++;
+
+        if (ataque_cool >= ataque_delay && !ataque)
+        {
+            var bullet = instance_create_layer(x + (facing * 12), y, "Instances", obj_Bullet);
+            bullet.direction = (facing == 1) ? 0 : 180;
+            bullet.speed = 6;
+
+            aplicarRecoil(2);
+            ataque = true;
+        }
+
+        if (ataque_cool >= ataque_delay)
+        {
+            ataque_cool = 0;
+            ataque = false;
+
+            if (target != noone &&
+                point_distance(x,y,target.x,target.y) <= 200)
+            {
+                state = EnemyState.CHASE;
+            }
+            else
+            {
+                state = EnemyState.PATROL;
+            }
+        }
+
+    break;
 }
+
+// Atualiza facing apenas se estiver se movendo
+if (move_dir != 0)
+{
+    facing = move_dir;
+}
+
 //Recoil
 if (recoil_force != 0){
 	

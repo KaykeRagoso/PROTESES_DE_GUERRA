@@ -15,6 +15,7 @@ ataque_cool = 0;
 ataque_delay = 15;
 
 target = noone;
+move_dir = 0;
 facing = 1;
 
 recoil_force = 0;
