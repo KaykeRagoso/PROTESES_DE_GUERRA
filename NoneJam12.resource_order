@@ -5,8 +5,9 @@
     {"name":"mapa_incopleto","order":2,"path":"folders/hud/mapa_incopleto.yy",},
     {"name":"vida","order":1,"path":"folders/hud/vida.yy",},
     {"name":"Objetos","order":4,"path":"folders/Objetos.yy",},
+    {"name":"parallax","order":1,"path":"folders/parallax.yy",},
     {"name":"Rooms","order":6,"path":"folders/Rooms.yy",},
-    {"name":"sistema_de_luz_basico","order":1,"path":"folders/sistema_de_luz_basico.yy",},
+    {"name":"sistema_de_luz_basico","order":7,"path":"folders/sistema_de_luz_basico.yy",},
     {"name":"Sons","order":5,"path":"folders/Sons.yy",},
     {"name":"Sprites","order":3,"path":"folders/Sprites.yy",},
   ],
@@ -29,6 +30,7 @@
     {"name":"sprt_Block","order":1,"path":"sprites/sprt_Block/sprt_Block.yy",},
     {"name":"sprt_Bullet","order":2,"path":"sprites/sprt_Bullet/sprt_Bullet.yy",},
     {"name":"sprt_Inimigo","order":3,"path":"sprites/sprt_Inimigo/sprt_Inimigo.yy",},
+    {"name":"sprt_MaskEnemy","order":5,"path":"sprites/sprt_MaskEnemy/sprt_MaskEnemy.yy",},
     {"name":"sprt_Player","order":4,"path":"sprites/sprt_Player/sprt_Player.yy",},
   ],
 }
