@@ -11,7 +11,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"vida",
-    "path":"folders/vida/vida.yy",
+    "path":"folders/hud/vida/vida.yy",
   },
   "parentObjectId":null,
   "persistent":false,

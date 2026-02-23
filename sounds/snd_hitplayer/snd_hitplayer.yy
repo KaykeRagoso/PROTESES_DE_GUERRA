@@ -15,7 +15,7 @@
   "name":"snd_hitplayer",
   "parent":{
     "name":"vida",
-    "path":"folders/vida/vida.yy",
+    "path":"folders/hud/vida/vida.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

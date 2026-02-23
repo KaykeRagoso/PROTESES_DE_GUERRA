@@ -30,3 +30,4 @@ part_type_alpha2(part_dust, 0.8, 0);
 part_type_speed(part_dust, 1, 3, 0, 0);
 part_type_direction(part_dust, 0, 360, 0, 0);
 part_type_life(part_dust, 10, 20);
+

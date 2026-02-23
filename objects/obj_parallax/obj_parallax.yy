@@ -1,18 +1,15 @@
 {
   "$GMObject":"",
-  "%Name":"obj_life",
+  "%Name":"obj_parallax",
   "eventList":[
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":64,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":4,"eventType":7,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_life",
+  "name":"obj_parallax",
   "overriddenProperties":[],
   "parent":{
-    "name":"vida",
-    "path":"folders/hud/vida/vida.yy",
+    "name":"parallax",
+    "path":"folders/parallax.yy",
   },
   "parentObjectId":null,
   "persistent":false,

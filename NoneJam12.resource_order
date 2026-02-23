@@ -1,8 +1,9 @@
 {
   "FolderOrderSettings":[
-    {"name":"vida","order":7,"path":"folders/vida.yy",},
-    {"name":"gameover","order":3,"path":"folders/vida/gameover.yy",},
-    {"name":"vida","order":4,"path":"folders/vida/vida.yy",},
+    {"name":"hud","order":17,"path":"folders/hud.yy",},
+    {"name":"parallax","order":16,"path":"folders/parallax.yy",},
+    {"name":"gameover","order":3,"path":"folders/hud/vida/gameover.yy",},
+    {"name":"vida","order":4,"path":"folders/hud/vida/vida.yy",},
   ],
   "ResourceOrderSettings":[
     {"name":"obj_Block","order":6,"path":"objects/obj_Block/obj_Block.yy",},
@@ -13,6 +14,9 @@
     {"name":"snd_hitplayer","order":3,"path":"sounds/snd_hitplayer/snd_hitplayer.yy",},
     {"name":"snd_wall_jump","order":9,"path":"sounds/snd_wall_jump/snd_wall_jump.yy",},
     {"name":"spr_borda_vida","order":2,"path":"sprites/spr_borda_vida/spr_borda_vida.yy",},
+    {"name":"spr_parallax1","order":1,"path":"sprites/spr_parallax1/spr_parallax1.yy",},
+    {"name":"spr_parallax2","order":2,"path":"sprites/spr_parallax2/spr_parallax2.yy",},
+    {"name":"spr_parallax3","order":3,"path":"sprites/spr_parallax3/spr_parallax3.yy",},
     {"name":"spr_pixel","order":11,"path":"sprites/spr_pixel/spr_pixel.yy",},
     {"name":"sprt_Block","order":5,"path":"sprites/sprt_Block/sprt_Block.yy",},
     {"name":"sprt_Bullet","order":7,"path":"sprites/sprt_Bullet/sprt_Bullet.yy",},
