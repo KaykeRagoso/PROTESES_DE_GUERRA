@@ -2,8 +2,8 @@
 target = obj_Player;
 
 // Configuração de camera
-cam_w = 640;
-cam_h = 360;
+cam_w = 910;
+cam_h = 512;
 follow_speed = 0.15;
 offset_x = 0;
 offset_y = 0;
