@@ -12,7 +12,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"gameover",
-    "path":"folders/vida/gameover.yy",
+    "path":"folders/hud/vida/gameover.yy",
   },
   "parentObjectId":null,
   "persistent":false,

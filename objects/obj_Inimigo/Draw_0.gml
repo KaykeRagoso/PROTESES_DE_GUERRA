@@ -1,2 +1,2 @@
 draw_self()
-draw_text(x,y,hpEnemy);
+draw_text(x,y,state);
