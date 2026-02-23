@@ -9,8 +9,8 @@
     {"name":"sistema_de_luz_basico","order":1,"path":"folders/sistema_de_luz_basico.yy",},
     {"name":"Sons","order":5,"path":"folders/Sons.yy",},
     {"name":"Sprites","order":3,"path":"folders/Sprites.yy",},
-    {"name":"Tiros","order":6,"path":"folders/Sprites/Tiros.yy",},
     {"name":"SpritesPlayer","order":5,"path":"folders/Sprites/SpritesPlayer.yy",},
+    {"name":"Tiros","order":6,"path":"folders/Sprites/Tiros.yy",},
   ],
   "ResourceOrderSettings":[
     {"name":"Note2","order":1,"path":"notes/Note2/Note2.yy",},

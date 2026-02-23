@@ -43,8 +43,9 @@ switch (state)
             state = PlayerState.AIR;
         }
         
-        if (key_dash && can_dash)
-            state = PlayerState.DASH;
+		// Tira a opção de quando tá parado
+        //if (key_dash && can_dash)
+        //    state = PlayerState.DASH;
         
     break;
     
@@ -120,23 +121,42 @@ switch (state)
     break;
     
     
-    case PlayerState.DASH:
-        
-        if (dash_timer <= 0)
-        {
-            dash_timer = dash_duration;
-            can_dash = false;
-        }
-        
-        vsp = 0;
-        hsp = facing * dash_sp;
-        
-        dash_timer--;
-        
-        if (dash_timer <= 0)
-            state = PlayerState.AIR;
-        
-    break;
+	case PlayerState.DASH:
+
+	    // Inicializa delay
+	    if (!variable_instance_exists(id, "dash_delay_timer"))
+	        dash_delay_timer = 8; // 8 frames de delay antes do dash
+
+	    // Se ainda está no delay, trava movimento
+	    if (dash_delay_timer > 0)
+	    {
+	        dash_delay_timer--;
+	        hsp = 0;
+	        vsp = 0;
+	    }
+	    else
+	    {
+	        // Inicia o dash real
+	        if (dash_timer <= 0)
+	        {
+	            dash_timer = dash_duration;
+	            can_dash = false;
+	        }
+
+	        vsp = 0;
+	        hsp = facing * dash_sp;
+
+	        dash_timer--;
+
+	        // Ao final, volta para o estado AIR
+	        if (dash_timer <= 0)
+	        {
+	            state = PlayerState.AIR;
+	            dash_delay_timer = undefined; // reseta o delay para o próximo dash
+	        }
+	    }
+
+	break;
 }
 
 #endregion
@@ -212,7 +232,7 @@ switch (state)
     
     case PlayerState.DASH:
         sprite_index = sprt_PlayerDash;
-        image_speed = image_number / dash_duration;
+        image_speed = image_number / (dash_duration * 2);
     break;
 }
 
