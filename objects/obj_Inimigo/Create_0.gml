@@ -1,37 +1,47 @@
-spdEnemy = 1;
-spdEnemyMax = spdEnemy + 1;
-hspdEnemy = 0;
-vspdEnemy = 0;
-grv = 0.35;
-maxFall = 6;
-
-hpEnemy = 3;
-
-patrol_left = x - 64;
-patrol_right = x + 64;
-
-ataque = false;
-ataque_cool = 0;
-ataque_delay = 15;
-
-target = noone;
-move_dir = 0;
-facing = 1;
-
-recoil_force = 0;
-recoil_decay = 0.2;
-
-dropped = false;
-
-enum EnemyState{
-	PATROL, 
-	CHASE,
-	ATTACK,
-	DEATH
+enum EnemyState {
+    PATROL,
+    CHASE,
+    ATTACK,
+    DEATH
 }
 
 state = EnemyState.PATROL;
 
+// MOVIMENTO
+spdEnemy = 1;
+spdEnemyMax = 2.5;
+
+hspdEnemy = 0;
+vspdEnemy = 0;
+
+grv = 0.35;
+maxFall = 6;
+
+facing = 1;
+move_dir = 1;
+
+// VIDA
+hpEnemy = 3;
+dropped = false;
+
+// COMBATE
+target = noone;
+
+ataque = false;
+ataque_cool = 0;
+ataque_delay = 60;
+
+recoil_force = 0;
+recoil_decay = 0.15;
+
+// VISÃO
+dist_visao = 300;
+dist_tiro  = 200;
+mostrar_alerta = 0;
+tempo_perda_alvo = 0;
+
+
+// FUNÇÕES
 function checkDeath(){
     if (hpEnemy <= 0 && !dropped){
         dropItem();
@@ -40,19 +50,17 @@ function checkDeath(){
     }
 }
 
-function aplicarRecoil(_forca){
-	recoil_force = _forca * -facing; 
+function aplicarRecoil(_dir, _forca){
+    recoil_force = lengthdir_x(_forca, _dir + 180);
 }
 
-//Drop de Item com 5% de drop poção vida, 15% munição e restante dropa nada
 function dropItem(){
-	var chance = irandom_range(1,100);
+    var chance = irandom_range(1,100);
 	
-	if (chance <= 10){
-		//instance_create_layer(x,y,"Instances",obj_Potion);
-		show_debug_message("Dropou Potion");
-	}else if (chance <= 25){
-		//instance_create_layer(x,y,"Instances",obj_Ammo);
-		show_debug_message("Dropou Munição");
-	}
+    if (chance <= 10){
+        show_debug_message("Dropou Potion");
+    }
+    else if (chance <= 25){
+        show_debug_message("Dropou Munição");
+    }
 }

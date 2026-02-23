@@ -2,10 +2,10 @@
   "FolderOrderSettings":[
     {"name":"enemy2","order":2,"path":"folders/enemy2.yy",},
     {"name":"sprites","order":3,"path":"folders/enemy2/sprites.yy",},
-    {"name":"Rooms","order":6,"path":"folders/Rooms.yy",},
     {"name":"mapa_incopleto","order":2,"path":"folders/hud/mapa_incopleto.yy",},
     {"name":"vida","order":1,"path":"folders/hud/vida.yy",},
     {"name":"Objetos","order":4,"path":"folders/Objetos.yy",},
+    {"name":"Rooms","order":6,"path":"folders/Rooms.yy",},
     {"name":"sistema_de_luz_basico","order":1,"path":"folders/sistema_de_luz_basico.yy",},
     {"name":"Sons","order":5,"path":"folders/Sons.yy",},
     {"name":"Sprites","order":3,"path":"folders/Sprites.yy",},
