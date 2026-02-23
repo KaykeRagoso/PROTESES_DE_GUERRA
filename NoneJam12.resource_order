@@ -1,16 +1,20 @@
 {
   "FolderOrderSettings":[
     {"name":"hud","order":17,"path":"folders/hud.yy",},
-    {"name":"parallax","order":16,"path":"folders/parallax.yy",},
+    {"name":"poção","order":1,"path":"folders/hud/poção.yy",},
     {"name":"gameover","order":3,"path":"folders/hud/vida/gameover.yy",},
     {"name":"vida","order":4,"path":"folders/hud/vida/vida.yy",},
+    {"name":"parallax","order":16,"path":"folders/parallax.yy",},
   ],
   "ResourceOrderSettings":[
+    {"name":"fnt_hud_vida_porc","order":4,"path":"fonts/fnt_hud_vida_porc/fnt_hud_vida_porc.yy",},
     {"name":"obj_Block","order":6,"path":"objects/obj_Block/obj_Block.yy",},
     {"name":"obj_Bullet","order":8,"path":"objects/obj_Bullet/obj_Bullet.yy",},
+    {"name":"obj_hud_pocao_vida","order":1,"path":"objects/obj_hud_pocao_vida/obj_hud_pocao_vida.yy",},
     {"name":"obj_Inimigo","order":4,"path":"objects/obj_Inimigo/obj_Inimigo.yy",},
     {"name":"obj_life","order":1,"path":"objects/obj_life/obj_life.yy",},
     {"name":"obj_Player","order":2,"path":"objects/obj_Player/obj_Player.yy",},
+    {"name":"snd_bebendo","order":2,"path":"sounds/snd_bebendo/snd_bebendo.yy",},
     {"name":"snd_hitplayer","order":3,"path":"sounds/snd_hitplayer/snd_hitplayer.yy",},
     {"name":"snd_wall_jump","order":9,"path":"sounds/snd_wall_jump/snd_wall_jump.yy",},
     {"name":"spr_borda_vida","order":2,"path":"sprites/spr_borda_vida/spr_borda_vida.yy",},
