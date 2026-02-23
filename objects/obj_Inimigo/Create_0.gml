@@ -15,10 +15,13 @@ ataque_cool = 0;
 ataque_delay = 15;
 
 target = noone;
+move_dir = 0;
 facing = 1;
 
 recoil_force = 0;
 recoil_decay = 0.2;
+
+dropped = false;
 
 enum EnemyState{
 	PATROL, 
@@ -30,10 +33,11 @@ enum EnemyState{
 state = EnemyState.PATROL;
 
 function checkDeath(){
-	if (hpEnemy <= 0){
-		dropItem();
-		state = EnemyState.DEATH;	
-	}
+    if (hpEnemy <= 0 && !dropped){
+        dropItem();
+        dropped = true;
+        state = EnemyState.DEATH;	
+    }
 }
 
 function aplicarRecoil(_forca){
@@ -44,10 +48,10 @@ function aplicarRecoil(_forca){
 function dropItem(){
 	var chance = irandom_range(1,100);
 	
-	if (chance <= 5){
+	if (chance <= 10){
 		//instance_create_layer(x,y,"Instances",obj_Potion);
 		show_debug_message("Dropou Potion");
-	}else if (chance <= 20){
+	}else if (chance <= 25){
 		//instance_create_layer(x,y,"Instances",obj_Ammo);
 		show_debug_message("Dropou Munição");
 	}
