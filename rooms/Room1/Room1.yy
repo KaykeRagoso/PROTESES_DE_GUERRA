@@ -48,8 +48,8 @@
   ],
   "name":"Room1",
   "parent":{
-    "name":"NoneJam12",
-    "path":"NoneJam12.yyp",
+    "name":"Rooms",
+    "path":"folders/Rooms.yy",
   },
   "parentRoom":null,
   "physicsSettings":{
