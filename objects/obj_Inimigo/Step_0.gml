@@ -25,6 +25,7 @@ switch (state)
 {
     case EnemyState.PATROL:
 
+<<<<<<< HEAD
         move_dir = facing;
 
         var frontX = x + (facing * 8);
@@ -113,6 +114,81 @@ switch (state)
         }
 
     break;
+=======
+	case EnemyState.PATROL:
+		
+		hspdEnemy = spdEnemy * facing;
+		
+		// Não cair da plataforma
+		var frontX = x + (facing * 8);
+		var frontY = y + 16;
+		
+		if (!place_meeting(frontX, frontY, obj_Block)) {
+			facing *= -1;
+		}
+		
+	break;
+	
+	
+	case EnemyState.CHASE:
+		
+		if (target != noone){
+			var _dir = sign(target.x - x);
+			
+			if (_dir != 0) {
+			    facing = _dir;
+			}
+			
+			// Persegue mais rápido
+			hspdEnemy = spdEnemyMax * facing;
+			
+			// Distância ideal para ranged
+			var dx = abs(target.x - x);
+			var dy = abs(target.y - y);
+			if (dx < 160 && dy < 32){
+				state = EnemyState.ATTACK;
+			}
+		}
+		
+	break;
+	
+	
+	case EnemyState.ATTACK:
+		
+		hspdEnemy = 0;
+		
+		if (target != noone){
+			facing = sign(target.x - x);
+		}
+		
+		ataque_cool++;
+		
+		// Momento do disparo
+		if (ataque_cool >= ataque_delay && !ataque){
+			
+			var bullet = instance_create_layer(x + (facing * 12), y, "Instances", obj_Bullet);
+			bullet.direction = facing == 1 ? 0 : 180;
+			bullet.speed = 6;
+			
+			aplicarRecoil(2)
+			
+			ataque = true;
+		}
+		
+		// Final do ataque
+		if (ataque_cool >= ataque_delay){
+			ataque_cool = 0;
+			ataque = false;
+			state = EnemyState.CHASE;
+		}
+		
+	break;
+	
+	
+	case EnemyState.DEATH:		
+		instance_destroy();		
+	break;
+>>>>>>> main
 }
 
 // Atualiza facing apenas se estiver se movendo
@@ -168,4 +244,5 @@ if (place_meeting(x, y + vspdEnemy, obj_Block)){
 y += vspdEnemy;
 
 // Trocar Xscale automatico
-image_xscale = facing;
+if (facing == -1) image_xscale = -1;
+if (facing ==  1) image_xscale =  1;

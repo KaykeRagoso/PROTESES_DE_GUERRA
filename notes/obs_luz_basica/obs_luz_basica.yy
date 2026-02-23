@@ -1,0 +1,11 @@
+{
+  "$GMNotes":"v1",
+  "%Name":"obs_luz_basica",
+  "name":"obs_luz_basica",
+  "parent":{
+    "name":"sistema_de_luz_basico",
+    "path":"folders/sistema_de_luz_basico.yy",
+  },
+  "resourceType":"GMNotes",
+  "resourceVersion":"2.0",
+}
