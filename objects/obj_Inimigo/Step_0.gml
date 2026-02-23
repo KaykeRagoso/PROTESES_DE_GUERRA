@@ -194,4 +194,5 @@ switch(state){
 		sprite_index = spr_enemy_shoting;
 	break;
 }
+image_xscale = facing;
 #endregion
