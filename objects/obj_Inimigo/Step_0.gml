@@ -189,5 +189,9 @@ y += vspdEnemy;
 #endregion
 
 #region Troca de Sprite
-image_xscale = facing;
+switch(state){
+	case EnemyState.ATTACK:
+		sprite_index = spr_enemy_shoting;
+	break;
+}
 #endregion

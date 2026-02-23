@@ -30,6 +30,7 @@
     {"name":"sprt_Block","order":1,"path":"sprites/sprt_Block/sprt_Block.yy",},
     {"name":"sprt_Bullet","order":2,"path":"sprites/sprt_Bullet/sprt_Bullet.yy",},
     {"name":"sprt_Inimigo","order":3,"path":"sprites/sprt_Inimigo/sprt_Inimigo.yy",},
+    {"name":"sprt_InimigoMask","order":6,"path":"sprites/sprt_InimigoMask/sprt_InimigoMask.yy",},
     {"name":"sprt_MaskEnemy","order":5,"path":"sprites/sprt_MaskEnemy/sprt_MaskEnemy.yy",},
     {"name":"sprt_Player","order":4,"path":"sprites/sprt_Player/sprt_Player.yy",},
   ],
