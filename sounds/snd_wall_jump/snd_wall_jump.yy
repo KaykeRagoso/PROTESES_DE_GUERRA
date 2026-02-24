@@ -10,7 +10,7 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":0.4702041,
+  "duration":1.56,
   "exportDir":"",
   "name":"snd_wall_jump",
   "parent":{

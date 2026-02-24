@@ -1,0 +1,1 @@
+mostrar_interacao = 0;

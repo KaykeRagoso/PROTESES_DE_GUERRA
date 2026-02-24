@@ -49,6 +49,8 @@ switch (state)
         
     break;
     
+
+
     
     case PlayerState.RUN:
         
@@ -237,3 +239,15 @@ switch (state)
 }
 
 #endregion
+/*
+if keyboard_check(ord("A")) or keyboard_check(ord("D"))  {
+ 
+		layer_set_visible("efeito_correndo", true);
+  
+	
+} else {
+   
+	 layer_set_visible("efeito_correndo", false);
+	 
+}
+*/
