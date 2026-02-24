@@ -195,12 +195,12 @@ if (facing != 0)
 switch (state)
 {
     case PlayerState.IDLE:
-        sprite_index = sprt_PlayerIdle;
+        sprite_index = sprt_PlayerIdleDir;
         image_speed = image_number / 2;
     break;
     
     case PlayerState.RUN:
-        sprite_index = sprt_PlayerRun;
+        sprite_index = sprt_PlayerRunDir;
         image_speed = image_number / 3;
     break;
     
@@ -209,21 +209,21 @@ switch (state)
         
         if (on_wall != 0 && vsp > 0)
         {
-            sprite_index = sprt_PlayerJumpHold;
+            sprite_index = sprt_PlayerJumpHoldDir;
             image_speed = image_number / 1;
 			image_xscale = -on_wall;
 
         }
         else if (vsp < 0)
         {
-            sprite_index = sprt_PlayerJump;
+            sprite_index = sprt_PlayerJumpDir;
             image_speed = image_number / 3.5;
 			image_xscale = facing;
 			image_index = 0;
         }
         else
         {
-            sprite_index = sprt_PlayerFall;
+            sprite_index = sprt_PlayerFallDir;
             image_speed = image_number / 2.5;
 			image_xscale = facing;
         }
@@ -231,7 +231,7 @@ switch (state)
     break;
     
     case PlayerState.DASH:
-        sprite_index = sprt_PlayerDash;
+        sprite_index = sprt_PlayerDashDir;
         image_speed = image_number / (dash_duration * 2);
     break;
 }
