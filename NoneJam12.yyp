@@ -41,6 +41,7 @@
     {"id":{"name":"fnt_hud_vida_porc","path":"fonts/fnt_hud_vida_porc/fnt_hud_vida_porc.yy",},},
     {"id":{"name":"Note2","path":"notes/Note2/Note2.yy",},},
     {"id":{"name":"obs_luz_basica","path":"notes/obs_luz_basica/obs_luz_basica.yy",},},
+    {"id":{"name":"anim_mt_util","path":"objects/anim_mt_util/anim_mt_util.yy",},},
     {"id":{"name":"obj_Block","path":"objects/obj_Block/obj_Block.yy",},},
     {"id":{"name":"obj_Bullet","path":"objects/obj_Bullet/obj_Bullet.yy",},},
     {"id":{"name":"obj_Camera","path":"objects/obj_Camera/obj_Camera.yy",},},

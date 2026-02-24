@@ -16,6 +16,7 @@
   "ResourceOrderSettings":[
     {"name":"Note2","order":1,"path":"notes/Note2/Note2.yy",},
     {"name":"obs_luz_basica","order":2,"path":"notes/obs_luz_basica/obs_luz_basica.yy",},
+    {"name":"anim_mt_util","order":8,"path":"objects/anim_mt_util/anim_mt_util.yy",},
     {"name":"obj_Bullet","order":1,"path":"objects/obj_Bullet/obj_Bullet.yy",},
     {"name":"obj_Camera","order":2,"path":"objects/obj_Camera/obj_Camera.yy",},
     {"name":"obj_inimigo_ia","order":1,"path":"objects/obj_inimigo_ia/obj_inimigo_ia.yy",},
