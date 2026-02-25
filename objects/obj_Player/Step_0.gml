@@ -72,27 +72,22 @@ if (weapon == WeaponType.GUN && state != PlayerState.CUTSCENE && state != Player
         }
     }
 
-    // No máximo — atira automaticamente
+    // No máximo — trava o charge, não cancela
     if (is_charging && gun_charge >= gun_max_charge)
-    {
-        attack_type    = 13;
-        is_charging    = false;
-        gun_hold_timer = 0;
-        gun_charge     = 0;
-        state          = PlayerState.ATTACK;
-        attack_timer   = 0;
-        can_shoot      = true;
-    }
+        gun_charge = gun_max_charge;
 
     if (key_attack_released)
     {
         if (is_charging)
         {
-            // Atira no nível atual (inclui máximo se chegou lá)
-            if      (gun_charge < 15) attack_type = 10;
-            else if (gun_charge < 30) attack_type = 11;
-            else if (gun_charge < 45) attack_type = 12;
-            else                      attack_type = 13;
+            // 7 níveis divididos em 60 frames (~8 frames cada)
+            if      (gun_charge <  9) attack_type = 10;  // Fraco Pequeno
+            else if (gun_charge < 18) attack_type = 11;  // Fraco Médio
+            else if (gun_charge < 27) attack_type = 12;  // Fraco Grande
+            else if (gun_charge < 36) attack_type = 13;  // Grande
+            else if (gun_charge < 45) attack_type = 14;  // Azul Forte
+            else if (gun_charge < 54) attack_type = 15;  // Roxo Forte
+            else                      attack_type = 16;  // Vermelho Forte
         }
         else if (gun_hold_timer > 0)
         {
@@ -338,10 +333,13 @@ case PlayerState.ATTACK:
 
         switch (attack_type)
         {
-            case 10: shootBullet(sprt_TiroFracoPequeno, _dir, 6, 1,    _ox, _oy, false); break;
-            case 11: shootBullet(sprt_TiroFracoMedio,   _dir, 7, 3,    _ox, _oy, false); break;
-            case 12: shootBullet(sprt_TiroFracoGrande,  _dir, 8, 6,    _ox, _oy, false); break;
-            case 13: shootBullet(sprt_TiroGrande,       _dir, 9, 9999, _ox, _oy, true);  break;
+            case 10: shootBullet(sprt_TiroFracoPequeno, _dir, 6,    1,    _ox, _oy, false); break;
+            case 11: shootBullet(sprt_TiroFracoMedio,   _dir, 6.5,  2,    _ox, _oy, false); break;
+            case 12: shootBullet(sprt_TiroFracoGrande,  _dir, 7,    3,    _ox, _oy, false); break;
+            case 13: shootBullet(sprt_TiroGrande,       _dir, 7.5,  5,    _ox, _oy, false); break;
+            case 14: shootBullet(sprt_TiroAzulForte,    _dir, 8,    7,    _ox, _oy, false); break;
+            case 15: shootBullet(sprt_TiroRoxoForte,    _dir, 8.5,  10,   _ox, _oy, false); break;
+            case 16: shootBullet(sprt_TiroVermelhoForte,_dir, 9,    9999, _ox, _oy, true);  break;
         }
 
         gun_charge = 0;
@@ -396,17 +394,32 @@ case PlayerState.IDLE:
         if (sprite_index != _spr_hold)
         {
             sprite_index = _spr_hold;
+            image_speed  = 0;
             image_index  = 0;
-            image_speed  = image_number / 4.85;
         }
 
-        if (gun_charge >= gun_max_charge)
+        if (!is_charging)
         {
-            // Charge 100% — loop nos últimos 4 frames
-            image_speed = 0;
-            image_index += 0.15;  // velocidade do loop, ajuste se quiser mais rápido/lento
-            if (image_index >= image_number)
-                image_index = image_number - 2;
+            // Delay (0-60 frames) — avança frames 0 ao 2 (posicionamento)
+            image_index = lerp(0, 2, gun_hold_timer / 60);
+        }
+        else if (gun_charge < gun_max_charge)
+        {
+            // Charge ativo — sincroniza frames 2 ao 54 com gun_charge
+            // Frame 2-7:   tiro fraco pequeno aparece
+            // Frame 8-10:  próximo tiro
+            // Frame 10-19: efeitos de energia
+            // Frame 20-28: tiro cresce
+            // Frame 29-46: pisca azul
+            // Frame 47-54: pisca roxo
+            image_index = 2 + (gun_charge / (gun_max_charge - 1)) * 52;
+        }
+        else
+        {
+            // Charge 100% (vermelho) — loop entre frames 55 e 65
+            image_index += 0.15;
+            if (image_index >= 66)
+                image_index = 55;
         }
     }
     else
