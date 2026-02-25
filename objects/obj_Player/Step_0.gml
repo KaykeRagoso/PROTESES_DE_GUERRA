@@ -6,7 +6,9 @@ var key_dash  = keyboard_check_pressed(vk_shift);
 
 //Ataques
 var key_switchWeapon = keyboard_check_pressed(vk_tab);
-var key_attack = keyboard_check_pressed(ord("Z"));
+var key_attack = keyboard_check(ord("Z"));
+var key_attack_pressed = keyboard_check_pressed(ord("Z"));
+var key_attack_released = keyboard_check_released(ord("Z"));
 var key_kick = keyboard_check_pressed(ord("X"));
 var key_spin = keyboard_check_pressed(ord("C"));
 
@@ -37,8 +39,46 @@ if (wall_l) on_wall = -1;
 #endregion
 
 
-#region STATE MACHINE
+#region COMBO TIMER
+if (combo_timer > 0)
+{
+    combo_timer--;
+}
+else
+{
+    combo_step = 0;
+}
+#endregion
 
+#region GUN CHARGE
+if (weapon == WeaponType.GUN)
+{
+    if (key_attack)
+    {
+        gun_charge += 1;
+
+        if (gun_charge > gun_max_charge)
+            gun_charge = gun_max_charge;
+
+        hsp = 0;
+    }
+
+    if (key_attack_released)
+    {
+        state = PlayerState.ATTACK;
+        attack_timer = 0;
+        attack_type = 10;
+    }
+}
+#endregion
+
+#region ATTACK COOLDOWN
+if (attack_cooldown > 0)
+    attack_cooldown--;
+#endregion
+
+
+#region STATE MACHINE
 switch (state)
 {
 
@@ -61,14 +101,28 @@ case PlayerState.IDLE:
         state = PlayerState.AIR;
     }
 
-    if (key_attack || key_kick || key_spin)
+    if ((key_attack_pressed || key_kick || key_spin) && attack_cooldown <= 0)
     {
         state = PlayerState.ATTACK;
         attack_timer = 0;
+        attack_cooldown = attack_cooldown_max;
 
-        if (key_attack) attack_type = 1;
-        if (key_kick) attack_type = 2;
-        if (key_spin) attack_type = 3;
+        if (weapon == WeaponType.BASIC)
+        {
+            if (key_attack_pressed)
+            {
+                combo_step += 1;
+                combo_timer = combo_max_time;
+                if (combo_step > 2) combo_step = 1;
+                attack_type = combo_step;
+            }
+
+            if (key_kick) attack_type = 3;
+            if (key_spin) attack_type = 4;
+        }
+
+        if (weapon == WeaponType.SWORD) attack_type = 1;
+        if (weapon == WeaponType.GUN) attack_type = 10;
     }
 
 break;
@@ -96,14 +150,28 @@ case PlayerState.RUN:
     if (key_dash && can_dash)
         state = PlayerState.DASH;
 
-    if (key_attack || key_kick || key_spin)
+    if ((key_attack_pressed || key_kick || key_spin) && attack_cooldown <= 0)
     {
         state = PlayerState.ATTACK;
         attack_timer = 0;
+        attack_cooldown = attack_cooldown_max;
 
-        if (key_attack) attack_type = 1;
-        if (key_kick) attack_type = 2;
-        if (key_spin) attack_type = 3;
+        if (weapon == WeaponType.BASIC)
+        {
+            if (key_attack_pressed)
+            {
+                combo_step += 1;
+                combo_timer = combo_max_time;
+                if (combo_step > 2) combo_step = 1;
+                attack_type = combo_step;
+            }
+
+            if (key_kick) attack_type = 3;
+            if (key_spin) attack_type = 4;
+        }
+
+        if (weapon == WeaponType.SWORD) attack_type = 1;
+        if (weapon == WeaponType.GUN) attack_type = 10;
     }
 
 break;
@@ -119,31 +187,28 @@ case PlayerState.AIR:
     else
     {
         hsp = move * walksp;
-
-        if (move != 0)
-            facing = move;
+        if (move != 0) facing = move;
     }
 
-		// Wall slide (só com braço básico)
-		if (weapon == WeaponType.BASIC)
-		{
-		    if (on_wall != 0 && vsp > 0)
-		        vsp = min(vsp, wall_speed_limit);
-		}
-	if (weapon == WeaponType.BASIC){
-	    if (on_wall != 0 && key_jump)
-	    {
-	        vsp = jump_force;
-	        hsp = -on_wall * walksp * 2.5;
-	        facing = -on_wall;
-	        control_lock = 12;
+    // Wall slide (só com braço básico)
+    if (weapon == WeaponType.BASIC)
+    {
+        if (on_wall != 0 && vsp > 0)
+            vsp = min(vsp, wall_speed_limit);
 
-	        audio_play_sound(snd_wall_jump, 10, false);
+        if (on_wall != 0 && key_jump)
+        {
+            vsp = jump_force;
+            hsp = -on_wall * walksp * 2.5;
+            facing = -on_wall;
+            control_lock = 12;
 
-	        var lado_parede = on_wall;
-	        part_particles_create(part_sys, x + (10 * lado_parede), y, part_dust, 10);
-	    }
-	}
+            audio_play_sound(snd_wall_jump, 10, false);
+
+            part_particles_create(part_sys, x + (10 * on_wall), y, part_dust, 10);
+        }
+    }
+
     if (grounded)
     {
         can_dash = true;
@@ -170,7 +235,6 @@ case PlayerState.DASH:
     }
     else
     {
-
         if (dash_timer <= 0)
         {
             dash_timer = dash_duration;
@@ -187,7 +251,6 @@ case PlayerState.DASH:
             state = PlayerState.AIR;
             dash_delay_timer = undefined;
         }
-
     }
 
 break;
@@ -200,155 +263,109 @@ case PlayerState.ATTACK:
 
     attack_timer++;
 
+    // Fim do ataque
     if (attack_timer > 15)
     {
         state = PlayerState.IDLE;
     }
 
+    // Hitbox básico
+    if (attack_type <= 3)
+    {
+        var hit = collision_rectangle(x + (facing * 20), y - 10, x + (facing * 40), y + 10, obj_Inimigo, false, true);
+        if (hit != noone) with(hit) { hpEnemy -= 1; }
+    }
+
+    // Canhão dispara de acordo com gun_charge
+    if (weapon == WeaponType.GUN && attack_type == 10)
+    {
+        // spawn de tiro aqui, por exemplo:
+        // instance_create_layer(x + facing*16, y, "Instances", obj_Tiro);
+        gun_charge = 0;
+    }
+
 break;
 
 }
-
 #endregion
 
 
-
 #region COLISÕES
-
 // Horizontal
 if (place_meeting(x + hsp, y, obj_Block))
 {
     while (!place_meeting(x + sign(hsp), y, obj_Block))
         x += sign(hsp);
-
     hsp = 0;
 }
 x += hsp;
-
 
 // Vertical
 if (place_meeting(x, y + vsp, obj_Block))
 {
     while (!place_meeting(x, y + sign(vsp), obj_Block))
         y += sign(vsp);
-
     vsp = 0;
 }
 y += vsp;
-
 #endregion
 
 
-
 #region SPRITES
-
 switch (state)
 {
 
 case PlayerState.IDLE:
-
-    if (weapon == WeaponType.BASIC)
-        sprite_index = (facing == 1) ? sprt_PlayerIdleEsq : sprt_PlayerIdleDir;
-
-    if (weapon == WeaponType.SWORD)
-        sprite_index = (facing == 1) ? sprt_PlayerIdleEspadaDir : sprt_PlayerIdleEspadaEsq;
-
-    if (weapon == WeaponType.GUN)
-        sprite_index = (facing == 1) ? sprt_PlayerIdleCanhaoEsq : sprt_PlayerIdleCanhaoDir;
-
+    if (weapon == WeaponType.BASIC) sprite_index = (facing == 1) ? sprt_PlayerIdleEsq : sprt_PlayerIdleDir;
+    if (weapon == WeaponType.SWORD) sprite_index = (facing == 1) ? sprt_PlayerIdleEspadaDir : sprt_PlayerIdleEspadaEsq;
+    if (weapon == WeaponType.GUN) sprite_index = (facing == 1) ? sprt_PlayerIdleCanhaoEsq : sprt_PlayerIdleCanhaoDir;
     image_speed = image_number / 2;
-
 break;
-
-
 
 case PlayerState.RUN:
-
-    if (weapon == WeaponType.BASIC)
-        sprite_index = (facing == 1) ? sprt_PlayerRunEsq : sprt_PlayerRunDir;
-
-    if (weapon == WeaponType.SWORD)
-        sprite_index = (facing == 1) ? sprt_PlayerRunEspadaEsq : sprt_PlayerRunEspadaDir;
-
-    if (weapon == WeaponType.GUN)
-        sprite_index = (facing == 1) ? sprt_PlayerRunCanhaoEsq : sprt_PlayerRunCanhaoDir;
-
+    if (weapon == WeaponType.BASIC) sprite_index = (facing == 1) ? sprt_PlayerRunEsq : sprt_PlayerRunDir;
+    if (weapon == WeaponType.SWORD) sprite_index = (facing == 1) ? sprt_PlayerRunEspadaEsq : sprt_PlayerRunEspadaDir;
+    if (weapon == WeaponType.GUN) sprite_index = (facing == 1) ? sprt_PlayerRunCanhaoEsq : sprt_PlayerRunCanhaoDir;
     image_speed = image_number / 3;
-
 break;
 
-
-
 case PlayerState.AIR:
-
     if (on_wall != 0 && vsp > 0 && weapon == WeaponType.BASIC)
     {
-		if (on_wall == 1){
-			sprite_index = sprt_PlayerWallSlideDir;
-		}else if (on_wall == -1){
-			sprite_index = sprt_PlayerWallSlideEsq;	
-		}
+        sprite_index = (on_wall == 1) ? sprt_PlayerWallSlideDir : sprt_PlayerWallSlideEsq;
     }
     else
     {
-
-        if (weapon == WeaponType.BASIC)
-            sprite_index = (facing == 1) ? sprt_PlayerJumpandFallEsq : sprt_PlayerJumpandFallDir;
-
-        if (weapon == WeaponType.SWORD)
-            sprite_index = (facing == 1) ? sprt_PlayerJumpandfallEspadaEsq : sprt_PlayerJumpandfallEspadaDir;
-
-        if (weapon == WeaponType.GUN)
-            sprite_index = (facing == 1) ? sprt_PlayerJumpandFallCanhaoEsq : sprt_PlayerJumpandFallCanhaoDir;
+        if (weapon == WeaponType.BASIC) sprite_index = (facing == 1) ? sprt_PlayerJumpandFallEsq : sprt_PlayerJumpandFallDir;
+        if (weapon == WeaponType.SWORD) sprite_index = (facing == 1) ? sprt_PlayerJumpandfallEspadaEsq : sprt_PlayerJumpandfallEspadaDir;
+        if (weapon == WeaponType.GUN) sprite_index = (facing == 1) ? sprt_PlayerJumpandFallCanhaoEsq : sprt_PlayerJumpandFallCanhaoDir;
     }
-
 break;
-
-
 
 case PlayerState.DASH:
-
-    if (weapon == WeaponType.BASIC)
-        sprite_index = (facing == 1) ? sprt_PlayerDashEsq : sprt_PlayerDashDir;
-
-    if (weapon == WeaponType.SWORD)
-        sprite_index = (facing == 1) ? sprt_PlayerDashEspadaEsq  : sprt_PlayerDashEspadaDir;
-
-    if (weapon == WeaponType.GUN)
-        sprite_index = (facing == 1) ? sprt_PlayerDashCanhaoEsq : sprt_PlayerDashCanhaoDir;
-
+    if (weapon == WeaponType.BASIC) sprite_index = (facing == 1) ? sprt_PlayerDashEsq : sprt_PlayerDashDir;
+    if (weapon == WeaponType.SWORD) sprite_index = (facing == 1) ? sprt_PlayerDashEspadaEsq  : sprt_PlayerDashEspadaDir;
+    if (weapon == WeaponType.GUN) sprite_index = (facing == 1) ? sprt_PlayerDashCanhaoEsq : sprt_PlayerDashCanhaoDir;
 break;
 
-
-
 case PlayerState.ATTACK:
-
     if (weapon == WeaponType.BASIC)
     {
-        if (attack_type == 1)
-            sprite_index = (facing == 1) ? sprt_PlayerSocoFrenteEsq  : sprt_PlayerSocoFrenteDir;
-
-        if (attack_type == 2)
-            sprite_index = (facing == 1) ? sprt_PlayerChuteBaixoEsq : sprt_PlayerChuteBaixoDir;
-
-        if (attack_type == 3)
-            sprite_index = (facing == 1) ? sprt_PlayerAtaqueGiratorioEsq  : sprt_PlayerAtaqueGiratorioDir;
+        if (attack_type == 1) sprite_index = (facing == 1) ? sprt_PlayerSocoFrenteEsq  : sprt_PlayerSocoFrenteDir;
+        if (attack_type == 2) sprite_index = (facing == 1) ? sprt_PlayerSocoFrenteEsq  : sprt_PlayerSocoFrenteDir;
+        if (attack_type == 3) sprite_index = (facing == 1) ? sprt_PlayerChuteBaixoEsq : sprt_PlayerChuteBaixoDir;
+        if (attack_type == 4) sprite_index = (facing == 1) ? sprt_PlayerAtaqueGiratorioEsq  : sprt_PlayerAtaqueGiratorioDir;
     }
-
     if (weapon == WeaponType.SWORD)
     {
         sprite_index = (facing == 1) ? sprt_PlayerAtaqueEspadaEsq : sprt_PlayerAtaqueEspadaDir;
     }
-
     if (weapon == WeaponType.GUN)
     {
         sprite_index = (facing == 1) ? sprt_PlayerAtirouEsq  : sprt_PlayerAtirouDir;
     }
-
     image_speed = image_number / 2;
-
 break;
 
 }
-
 #endregion

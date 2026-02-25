@@ -55,6 +55,13 @@ weapon = WeaponType.BASIC;
 // Sistema de ataque
 attack_type = 0;
 attack_timer = 0;
+attack_cooldown = 0;
+attack_cooldown_max = 5;
+
+// Combos
+combo_step = 0;
+combo_timer = 0;
+combo_max_time = 20; // frames que o combo espera para resetar
 
 // Canhão
 gun_charge = 0;
