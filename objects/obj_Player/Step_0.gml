@@ -281,17 +281,17 @@ break;
 
 case PlayerState.AIR:
 
-    // WALL SLIDE
-    if (weapon == WeaponType.BASIC && on_wall != 0 && vsp > 0)
+    if (on_wall != 0 && vsp > 0 && weapon == WeaponType.BASIC)
     {
-        sprite_index = sprt_PlayerWallSlide;
-        image_speed = image_number / 2;
-
-        // Inverte conforme o lado da parede
-        image_xscale = -on_wall;
+		if (on_wall == 1){
+			sprite_index = sprt_PlayerWallSlideDir;
+		}else if (on_wall == -1){
+			sprite_index = sprt_PlayerWallSlideEsq;	
+		}
     }
     else
     {
+
         if (weapon == WeaponType.BASIC)
             sprite_index = (facing == 1) ? sprt_PlayerJumpandFallEsq : sprt_PlayerJumpandFallDir;
 
@@ -300,8 +300,6 @@ case PlayerState.AIR:
 
         if (weapon == WeaponType.GUN)
             sprite_index = (facing == 1) ? sprt_PlayerJumpandFallCanhaoEsq : sprt_PlayerJumpandFallCanhaoDir;
-
-        image_speed = image_number / 2;
     }
 
 break;

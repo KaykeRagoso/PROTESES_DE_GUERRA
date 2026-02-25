@@ -111,6 +111,7 @@
     {"name":"sprt_PlayerSocoFrenteEsq","order":3,"path":"sprites/sprt_PlayerSocoFrenteEsq/sprt_PlayerSocoFrenteEsq.yy",},
     {"name":"sprt_PlayerSuperGiratorioDir","order":4,"path":"sprites/sprt_PlayerSuperGiratorioDir/sprt_PlayerSuperGiratorioDir.yy",},
     {"name":"sprt_PlayerSuperGiratorioEsq","order":4,"path":"sprites/sprt_PlayerSuperGiratorioEsq/sprt_PlayerSuperGiratorioEsq.yy",},
+    {"name":"sprt_PlayerWallSlideDir","order":1,"path":"sprites/sprt_PlayerWallSlideDir/sprt_PlayerWallSlideDir.yy",},
     {"name":"sprt_TiroFraco","order":1,"path":"sprites/sprt_TiroFraco/sprt_TiroFraco.yy",},
     {"name":"sprt_TiroFraco2","order":2,"path":"sprites/sprt_TiroFraco2/sprt_TiroFraco2.yy",},
     {"name":"sprt_TiroFracoGrande","order":1,"path":"sprites/sprt_TiroFracoGrande/sprt_TiroFracoGrande.yy",},
