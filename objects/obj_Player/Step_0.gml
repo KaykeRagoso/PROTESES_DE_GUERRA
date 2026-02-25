@@ -15,9 +15,8 @@ var key_spin = keyboard_check_pressed(ord("C"));
 var move = key_right - key_left;
 #endregion
 
-
 #region SwitchWeapon
-if (key_switchWeapon && !state == PlayerState.CUTSCENE)
+if (key_switchWeapon && state != PlayerState.CUTSCENE)
 {
     weapon += 1;
 
