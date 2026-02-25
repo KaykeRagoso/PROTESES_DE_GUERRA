@@ -71,3 +71,16 @@ gun_charge = 0;
 gun_max_charge = 60;
 
 fpsGame = game_get_speed(gamespeed_fps);
+
+can_shoot = false;
+
+function shootBullet(_sprite, _dir, _spd, _dmg, _offset_x, _offset_y){
+    var b = instance_create_layer(obj_Player.x + _offset_x, obj_Player.y + _offset_y, "Instances", obj_Bullet);
+    b.sprite_index = _sprite;
+    b.img_speed = 0.2;
+    b.dir = _dir;
+    b.spd = _spd;
+    b.damage = _dmg;
+    b.hit_enemy = obj_Inimigo;
+    return b;
+}

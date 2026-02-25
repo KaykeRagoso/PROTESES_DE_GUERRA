@@ -277,13 +277,13 @@ break;
 case PlayerState.ATTACK:
 
     hsp = 0;
-
     attack_timer++;
 
     // Fim do ataque
     if (attack_timer > 15)
     {
         state = PlayerState.IDLE;
+        can_shoot = true;
     }
 
     // Hitbox básico
@@ -294,11 +294,24 @@ case PlayerState.ATTACK:
     }
 
     // Canhão dispara de acordo com gun_charge
-    if (weapon == WeaponType.GUN && attack_type == 10)
+    if (weapon == WeaponType.GUN && attack_type == 10 && can_shoot)
     {
-        // spawn de tiro aqui, por exemplo:
-        // instance_create_layer(x + facing*16, y, "Instances", obj_Tiro);
+        var tiro_sprite = sprt_TiroAzulForte;
+        if (gun_charge < 10) tiro_sprite = sprt_TiroFracoPequeno;
+        else if (gun_charge < 20) tiro_sprite = sprt_TiroFracoMedio;
+        else if (gun_charge < 30) tiro_sprite = sprt_TiroFracoGrande;
+        else tiro_sprite = sprt_TiroGrande;
+
+        var offset_x = 8 * facing;
+        var offset_y = -4;
+        var tiro_dir = (facing == 1) ? 0 : 180;
+        var tiro_spd = 7.5;
+        var tiro_dmg = 1;
+
+        shootBullet(tiro_sprite, tiro_dir, tiro_spd, tiro_dmg, offset_x, offset_y);
+
         gun_charge = 0;
+        can_shoot = false;
     }
 
 break;
