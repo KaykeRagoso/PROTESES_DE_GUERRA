@@ -457,7 +457,8 @@ case PlayerState.AIR:
             case WeaponType.BASIC: sprite_index = (facing==1) ? sprt_PlayerJumpandFallEsq       : sprt_PlayerJumpandFallDir;       break;
             case WeaponType.SWORD: sprite_index = (facing==1) ? sprt_PlayerJumpandfallEspadaEsq : sprt_PlayerJumpandfallEspadaDir; break;
             case WeaponType.GUN:   sprite_index = (facing==1) ? sprt_PlayerJumpandFallCanhaoEsq : sprt_PlayerJumpandFallCanhaoDir; break;
-        }
+		}
+			image_speed = image_number / 4;
     }
 break;
 
