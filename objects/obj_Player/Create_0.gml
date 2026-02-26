@@ -94,15 +94,10 @@ function shootBullet(_sprite, _dir, _spd, _dmg, _offset_x, _offset_y, _onehit)
 {
     var b          = instance_create_layer(x + _offset_x, y + _offset_y, "Instances", obj_EnemyBullet);
     b.sprite_index = _sprite;
-    b.image_speed  = 0.2;
-    // orienta conforme direção (0 = direita, 180 = esquerda)
+    b.image_speed  = 3;
     b.image_xscale = (_dir == 180) ? -1 : 1;
-    // use built‑in movement variables so bullet actually moves
     b.direction    = _dir;
     b.speed        = _spd;
-    // keep old fields in case other code reads them
-    b.dir          = _dir;
-    b.spd          = _spd;
     b.damage       = _dmg;
     b.one_hit      = _onehit;
     b.hit_enemy    = obj_InimigoPai;
