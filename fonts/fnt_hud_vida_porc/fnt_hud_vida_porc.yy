@@ -120,7 +120,7 @@
   "name":"fnt_hud_vida_porc",
   "parent":{
     "name":"vida",
-    "path":"folders/hud/vida/vida.yy",
+    "path":"folders/Objetos/hud/vida/vida.yy",
   },
   "pointRounding":0,
   "ranges":[

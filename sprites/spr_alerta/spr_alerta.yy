@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"enemy2",
-    "path":"folders/enemy2.yy",
+    "path":"folders/Objetos/enemy2.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

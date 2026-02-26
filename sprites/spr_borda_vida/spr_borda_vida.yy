@@ -26,7 +26,7 @@
   "origin":9,
   "parent":{
     "name":"vida",
-    "path":"folders/hud/vida/vida.yy",
+    "path":"folders/Objetos/hud/vida/vida.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

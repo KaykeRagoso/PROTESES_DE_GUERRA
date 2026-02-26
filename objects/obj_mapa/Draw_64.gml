@@ -35,7 +35,7 @@ if (animacao > 0.5) {
     
     // Desenha Inimigos
     draw_set_color(c_red);
-    with (obj_Inimigo) {
+    with (obj_InimigoPai) {
         draw_circle(_offset_x + (x * other.escala_mapa), _offset_y + (y * other.escala_mapa), 4, false);
     }
     
