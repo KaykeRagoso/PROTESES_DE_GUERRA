@@ -9,9 +9,9 @@ switch (weapon)
     case WeaponType.BASIC:
         switch (attack_type)
         {
-            case 1: case 2: _spr = sprt_PlayerSocoFrenteDir;      break;
-            case 3:         _spr = sprt_PlayerChuteBaixoDir;       break;
-            case 4:         _spr = sprt_PlayerAtaqueGiratorioDir;  break;
+            //case 1: case 2: _spr = sprt_PlayerSocoFrenteDir;      break;
+            //case 3:         _spr = sprt_PlayerChuteBaixoDir;       break;
+            //case 4:         _spr = sprt_PlayerAtaqueGiratorioDir;  break;
             default:        _spr = sprt_PlayerIdleDir;             break;
         }
     break;
@@ -19,8 +19,8 @@ switch (weapon)
     case WeaponType.SWORD:
         switch (attack_type)
         {
-            case 1: case 2: _spr = sprt_PlayerAtaqueEspadaDir;      break;
-            case 3:         _spr = sprt_PlayerAtaqueLoucoEspadaDir; break;
+            //case 1: case 2: _spr = sprt_PlayerAtaqueEspadaDir;      break;
+            //case 3:         _spr = sprt_PlayerAtaqueLoucoEspadaDir; break;
             default:        _spr = sprt_PlayerIdleEspadaDir;        break;
         }
     break;
@@ -29,13 +29,13 @@ switch (weapon)
         // Mostra o sprite do tiro carregado atual
         switch (attack_type)
         {
-            case 10: _spr = sprt_TiroFracoPequeno;  break;
-            case 11: _spr = sprt_TiroFracoMedio;    break;
-            case 12: _spr = sprt_TiroFracoGrande;   break;
-            case 13: _spr = sprt_TiroGrande;        break;
-            case 14: _spr = sprt_TiroAzulForte;     break;
-            case 15: _spr = sprt_TiroRoxoForte;     break;
-            case 16: _spr = sprt_TiroVermelhoForte; break;
+            //case 10: _spr = sprt_TiroFracoPequeno;  break;
+            //case 11: _spr = sprt_TiroFracoMedio;    break;
+            //case 12: _spr = sprt_TiroFracoGrande;   break;
+            //case 13: _spr = sprt_TiroGrande;        break;
+            //case 14: _spr = sprt_TiroAzulForte;     break;
+            //case 15: _spr = sprt_TiroRoxoForte;     break;
+            //case 16: _spr = sprt_TiroVermelhoForte; break;
             default: _spr = sprt_PlayerIdleCanhaoDir; break;
         }
     break;
