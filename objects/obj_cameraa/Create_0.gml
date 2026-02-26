@@ -20,3 +20,6 @@ surface_resize(application_surface, largura_view * escala_janela, altura_view * 
 
 display_reset(0, true); // Ativa V-Sync (evita quebra de quadros)
 alarm[0] = 1; // Centralizar janela
+
+window_set_fullscreen(true);
+surface_resize(application_surface, display_get_width(), display_get_height());

@@ -430,7 +430,7 @@ case PlayerState.DEATH:
 
         if (death_timer > 10 && !instance_exists(obj_game_over)) {
             instance_create_layer(0, 0, "Instances", obj_game_over);
-            room_speed = room_speed_original;
+
         }
     }
 break;
@@ -521,7 +521,7 @@ case PlayerState.IDLE:
             case WeaponType.SWORD: sprite_index = (facing==1) ? sprt_PlayerIdleEspadaDir : sprt_PlayerIdleEspadaEsq; break;
             case WeaponType.GUN:   sprite_index = (facing==1) ? sprt_PlayerIdleCanhaoEsq : sprt_PlayerIdleCanhaoDir; break;
         }
-        image_speed = image_number / 2;
+        image_speed = image_number / 8;
     }
 break;
 
@@ -532,7 +532,7 @@ case PlayerState.RUN:
         case WeaponType.SWORD: sprite_index = (facing==1) ? sprt_PlayerRunEspadaEsq : sprt_PlayerRunEspadaDir; break;
         case WeaponType.GUN:   sprite_index = (facing==1) ? sprt_PlayerRunCanhaoEsq : sprt_PlayerRunCanhaoDir; break;
     }
-    image_speed = image_number / 3;
+    image_speed = image_number / 6;
 break;
 
 case PlayerState.AIR:
@@ -548,7 +548,7 @@ case PlayerState.AIR:
             case WeaponType.SWORD: sprite_index = (facing==1) ? sprt_PlayerJumpandfallEspadaEsq : sprt_PlayerJumpandfallEspadaDir; break;
             case WeaponType.GUN:   sprite_index = (facing==1) ? sprt_PlayerJumpandFallCanhaoEsq : sprt_PlayerJumpandFallCanhaoDir; break;
         }
-        image_speed = image_number / 4;
+        image_speed = image_number / 8;
     }
 break;
 
@@ -580,12 +580,12 @@ case PlayerState.ATTACK:
             case 1:
             case 2:
                 sprite_index = (facing==1) ? sprt_PlayerAtaqueEspadaEsq : sprt_PlayerAtaqueEspadaDir;
-                image_speed = image_number / 2;
+                image_speed = image_number / 4;
             break;
 
             case 3:
                 sprite_index = (facing==1) ? sprt_PlayerAtaqueLoucoEspadaEsq : sprt_PlayerAtaqueLoucoEspadaDir;
-                image_speed = image_number / 2;
+                image_speed = image_number / 4;
             break;
         }
     }
@@ -593,7 +593,7 @@ case PlayerState.ATTACK:
     if (weapon == WeaponType.GUN)
     {
         sprite_index = (facing==1) ? sprt_PlayerAtirouEsq : sprt_PlayerAtirouDir;
-        image_speed = image_number / 2;
+        image_speed = image_number / 4;
     }
 break;
 
@@ -610,7 +610,7 @@ break;
 case PlayerState.DEATH:
     if (!grounded_final || death_timer <= 10) {
         sprite_index = (facing == 1) ? sprt_PlayerDeathEsq : sprt_PlayerDeathDir;
-        image_speed  = 0.2;
+        image_speed  = 0.4;
     } else {
         switch (weapon)
         {
