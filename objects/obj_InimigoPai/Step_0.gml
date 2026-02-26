@@ -11,11 +11,21 @@ if (state == EnemyState.DEATH)
 
 // Dano por contato
 if (state != EnemyState.DEATH) {
-    if (place_meeting(x, y, obj_Player)) {
-        with (obj_Player) {
-            takeDamage(10,other.facing);
-        }
-    }
+	if (state == EnemyState.PATROL || state == EnemyState.CHASE){
+		if (contato_dano_cooldown > 0){
+			contato_dano_cooldown--;
+		}else if (place_meeting(x,y,obj_Player)){
+			with(obj_Player){
+				takeDamage(10,other.facing);	
+			}
+			contato_dano_cooldown = 60;
+		}
+	}	
+}
+
+//Verificação de morte
+if (hpEnemy <= 0){
+	state = EnemyState.DEATH;
 }
 
 #region DETECÇÃO DO PLAYER

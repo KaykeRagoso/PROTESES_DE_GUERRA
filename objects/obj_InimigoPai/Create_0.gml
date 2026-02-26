@@ -66,6 +66,8 @@ erro_tiro = 6;
 recoil_force = 0;
 recoil_decay = 0.15;
 
+contato_dano_cooldown = 0;
+
 #endregion
 
 
