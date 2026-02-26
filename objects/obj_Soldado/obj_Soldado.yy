@@ -32,7 +32,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"sprt_Block",
+    "path":"sprites/sprt_Block/sprt_Block.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }

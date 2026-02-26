@@ -53,4 +53,3 @@ if (global.fade_missao1 = true){
 	x = x
 	y = y
 }
-show_debug_message(obj_Player.y)

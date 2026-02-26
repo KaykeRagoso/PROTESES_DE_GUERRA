@@ -9,6 +9,14 @@ if (state == EnemyState.DEATH)
     exit;
 }
 
+// Dano por contato
+if (state != EnemyState.DEATH) {
+    if (place_meeting(x, y, obj_Player)) {
+        with (obj_Player) {
+            takeDamage(10,other.facing);
+        }
+    }
+}
 
 #region DETECÇÃO DO PLAYER
 
@@ -173,6 +181,7 @@ switch (state)
             {
                 bullet.direction = dir;
                 bullet.speed = 5;
+				bullet.damage = 10;
                 bullet.owner = id;
             }
 
@@ -335,5 +344,3 @@ else
 image_xscale = facing;
 
 #endregion
-
-show_debug_message(hpEnemy);

@@ -52,6 +52,8 @@ enum PlayerState {
     AIR,
     DASH,
     ATTACK,
+	HIT,
+	DEATH,
     CUTSCENE
 }
 
@@ -67,6 +69,13 @@ enum WeaponType {
 state  = PlayerState.IDLE;
 weapon = WeaponType.BASIC;
 
+// Vida do player
+max_hp = 100;
+hp     = max_hp;
+invincible      = false; // para dar um tempo de invencibilidade após levar dano
+invincible_timer = 0;
+invincible_time  = 30;   // frames de invencibilidade após levar dano
+
 
 //Ataque
 attack_type         = 0;
@@ -74,6 +83,7 @@ attack_timer        = 0;
 attack_duration     = 15;
 attack_cooldown     = 0;
 attack_cooldown_max = 5;
+maxFall = 10;
 
 
 //Combo
@@ -89,6 +99,15 @@ gun_hold_timer = 0;
 can_shoot      = false;
 is_charging    = false;
 
+room_speed_original = room_speed;
+
+hit_timer        = 0;
+hit_duration     = 20; // frames no estado de hit
+death_timer      = 0;
+death_duration   = 60; // frames da animação de morte antes de ficar no chão
+is_dead          = false;
+
+
 //Funções
 function shootBullet(_sprite, _dir, _spd, _dmg, _offset_x, _offset_y, _onehit)
 {
@@ -102,4 +121,32 @@ function shootBullet(_sprite, _dir, _spd, _dmg, _offset_x, _offset_y, _onehit)
     b.one_hit      = _onehit;
     b.hit_enemy    = obj_InimigoPai;
     return b;
+}
+
+
+// Função de dano
+function takeDamage(_amount, _knockback_dir) {
+    if (invincible || is_dead) exit;
+
+    global.vida_atual -= _amount;
+    global.vida_atual = clamp(global.vida_atual, 0, global.vida_max);
+
+    instance_create_layer(x, y, "Instances", obj_flash_dano);
+    audio_play_sound(snd_hitplayer, 1, false);
+
+    if (global.vida_atual <= 0) {
+        is_dead = true;
+        state   = PlayerState.DEATH;
+        hsp     = 0;
+        vsp     = -3; // pequeno salto ao morrer
+        exit;
+    }
+
+    // Knockback
+    hsp              = -_knockback_dir * 4;
+    vsp              = -2;
+    invincible       = true;
+    invincible_timer = invincible_time;
+    hit_timer        = hit_duration;
+    state            = PlayerState.HIT;
 }

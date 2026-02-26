@@ -1,1 +1,1 @@
-room_speed = real
+room_speed = 60; // ou o valor padrão do seu jogo

@@ -23,7 +23,7 @@
   ],
   "name":"sprt_PlayerDownDir",
   "nineSlice":null,
-  "origin":4,
+  "origin":9,
   "parent":{
     "name":"Dir",
     "path":"folders/Sprites/Player/Basico/Hit&Morte/Dir.yy",
@@ -76,7 +76,7 @@
     "visibleRange":null,
     "volume":1.0,
     "xorigin":49,
-    "yorigin":6,
+    "yorigin":-16,
   },
   "swatchColours":null,
   "swfPrecision":0.5,
