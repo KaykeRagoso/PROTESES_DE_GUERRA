@@ -1,15 +1,13 @@
 {
   "$GMObject":"",
-  "%Name":"obj_Bullet",
-  "eventList":[
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":{"name":"obj_Block","path":"objects/obj_Block/obj_Block.yy",},"eventNum":0,"eventType":4,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-  ],
+  "%Name":"objPortal",
+  "eventList":[],
   "managed":true,
-  "name":"obj_Bullet",
+  "name":"objPortal",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objetos",
-    "path":"folders/Objetos.yy",
+    "name":"NoneJam12",
+    "path":"NoneJam12.yyp",
   },
   "parentObjectId":null,
   "persistent":false,
@@ -30,8 +28,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"sprt_Bullet",
-    "path":"sprites/sprt_Bullet/sprt_Bullet.yy",
+    "name":"spr_colisao_dialogo",
+    "path":"sprites/spr_colisao_dialogo/spr_colisao_dialogo.yy",
   },
   "spriteMaskId":null,
   "visible":true,

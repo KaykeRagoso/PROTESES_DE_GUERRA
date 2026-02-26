@@ -1,18 +1,18 @@
 {
   "$GMObject":"",
-  "%Name":"obj_inimigo_ia",
+  "%Name":"obj_ativar_missao",
   "eventList":[
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":2,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":64,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_inimigo_ia",
+  "name":"obj_ativar_missao",
   "overriddenProperties":[],
   "parent":{
-    "name":"enemy2",
-    "path":"folders/enemy2.yy",
+    "name":"npc1",
+    "path":"folders/npc/npc1.yy",
   },
   "parentObjectId":null,
   "persistent":false,
@@ -33,12 +33,9 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"sprt_Inimigo",
-    "path":"sprites/sprt_Inimigo/sprt_Inimigo.yy",
+    "name":"spr_colisao_dialogo",
+    "path":"sprites/spr_colisao_dialogo/spr_colisao_dialogo.yy",
   },
-  "spriteMaskId":{
-    "name":"sprt_MaskEnemy",
-    "path":"sprites/sprt_MaskEnemy/sprt_MaskEnemy.yy",
-  },
+  "spriteMaskId":null,
   "visible":true,
 }

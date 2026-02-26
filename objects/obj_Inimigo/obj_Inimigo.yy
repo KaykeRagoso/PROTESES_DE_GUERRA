@@ -33,12 +33,12 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_enemy_death",
-    "path":"sprites/spr_enemy_death/spr_enemy_death.yy",
+    "name":"spr_enemy_idle",
+    "path":"sprites/spr_enemy_idle/spr_enemy_idle.yy",
   },
   "spriteMaskId":{
-    "name":"sprt_Block",
-    "path":"sprites/sprt_Block/sprt_Block.yy",
+    "name":"sprt_MaskEnemy",
+    "path":"sprites/sprt_MaskEnemy/sprt_MaskEnemy.yy",
   },
   "visible":true,
 }
