@@ -1,40 +1,56 @@
 checkDeath();
 
-if (state == EnemyState.DEATH) {
-    instance_destroy();
+if (state == EnemyState.DEATH)
+{
+    if (image_index >= image_number - 1)
+    {
+        instance_destroy();
+    }
     exit;
 }
 
 
-#region Detecção
-if (instance_exists(obj_Player)) {
+#region DETECÇÃO DO PLAYER
 
-    var distPlayer = point_distance(x, y, obj_Player.x, obj_Player.y);
+var player = instance_nearest(x,y,obj_Player);
+
+if (player != noone)
+{
+
+    var distPlayer = point_distance(x,y,player.x,player.y);
 
     var parede = collision_line(
         x, y - 10,
-        obj_Player.x, obj_Player.y - 10,
+        player.x, player.y - 10,
         obj_Block, false, true
     );
 
-    if (distPlayer <= dist_visao && !parede) {
+    if (distPlayer <= dist_visao && !parede)
+    {
 
-        target = obj_Player;
+        target = player;
         tempo_perda_alvo = 0;
 
-        if (state == EnemyState.PATROL) {
+        if (state == EnemyState.PATROL)
+        {
             mostrar_alerta = 60;
         }
 
-    } 
-    else if (target != noone) {
+    }
+    else if (target != noone)
+    {
+
         tempo_perda_alvo++;
 
-        if (tempo_perda_alvo > 90) {
+        if (tempo_perda_alvo > 90)
+        {
             target = noone;
         }
+
     }
+
 }
+
 #endregion
 
 #region State Machine
