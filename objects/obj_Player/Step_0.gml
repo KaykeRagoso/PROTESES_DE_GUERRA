@@ -110,6 +110,20 @@ if (weapon == WeaponType.GUN && state != PlayerState.CUTSCENE && state != Player
 if (attack_cooldown > 0) attack_cooldown--;
 #endregion
 
+#region Invencibilidade
+
+if (invencivel)
+{
+    inv_timer--;
+
+    if (inv_timer <= 0)
+    {
+        invencivel = false;
+    }
+}
+
+#endregion
+
 #region State Machine
 switch (state)
 {
@@ -356,6 +370,20 @@ case PlayerState.ATTACK:
     {
         can_shoot = true;
         state     = PlayerState.IDLE;
+    }
+
+break;
+
+case PlayerState.DAMAGE:
+
+    hsp = lengthdir_x(knockback_force, knockback_dir);
+    vsp = -2;
+
+    knockback_force = lerp(knockback_force, 0, 0.2);
+
+    if (knockback_force < 0.2)
+    {
+        state = PlayerState.AIR;
     }
 
 break;

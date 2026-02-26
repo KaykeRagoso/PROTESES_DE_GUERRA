@@ -18,6 +18,12 @@ if (player != noone)
 {
 
     var distPlayer = point_distance(x, y, player.x, player.y);
+	
+	can_see_player =
+	(
+	    distPlayer < shoot_range
+	    && collision_line(x, y, player.x, player.y, obj_Block, false, true) == noone
+	);
 
     var parede = collision_line(
         x, y - 10,
@@ -53,6 +59,18 @@ if (player != noone)
 
 #endregion
 
+#region MIRA
+
+if (target != noone && instance_exists(target))
+{
+
+    var target_dir = point_direction(x, y - 10, target.x, target.y - 10);
+
+    aim_dir = lerp(aim_dir, target_dir, aim_speed);
+
+}
+
+#endregion
 
 
 #region STATE MACHINE
@@ -120,71 +138,78 @@ switch (state)
 
 
 
-    case EnemyState.ATTACK:
+   case EnemyState.ATTACK:
 
-        hspdEnemy = 0;
+    hspdEnemy = 0;
 
-        if (target != noone && instance_exists(target))
+    if (target != noone && instance_exists(target))
+    {
+
+        tempo_mira++;
+
+        if (tempo_mira < tempo_mira_max)
+            break;
+
+        reaction_timer++;
+
+        if (reaction_timer < reaction_time)
+            break;
+
+        if (!ataque)
         {
 
-            tempo_mira++;
+            var erro = random_range(-shot_inaccuracy, shot_inaccuracy);
 
-            if (tempo_mira < tempo_mira_max)
-                break;
+            var dir = aim_dir + erro;
 
-            var dir = point_direction(x, y, target.x, target.y);
-            dir += random_range(-erro_tiro, erro_tiro);
+            var bullet = instance_create_layer(
+                x + (facing * 12),
+                y - 10,
+                "Instances",
+                obj_EnemyBullet
+            );
 
-            if (!ataque)
+            if (bullet != noone)
             {
-
-                var bullet = instance_create_layer(
-                    x + (facing * 12),
-                    y - 10,
-                    "Instances",
-                    obj_Bullet
-                );
-
-                if (bullet != noone)
-                {
-                    bullet.direction = dir;
-                    bullet.speed = 5;
-                    bullet.owner = id;
-                }
-
-                aplicarRecoil(dir, 4);
-
-                ataque = true;
-                ataque_cool = 0;
-
+                bullet.direction = dir;
+                bullet.speed = 5;
+                bullet.owner = id;
             }
-            else
-            {
 
-                ataque_cool++;
+            aplicarRecoil(dir, 4);
 
-                if (ataque_cool >= ataque_delay)
-                {
-
-                    ataque = false;
-                    tempo_mira = 0;
-
-                    if (target != noone)
-                        state = EnemyState.CHASE;
-                    else
-                        state = EnemyState.PATROL;
-
-                }
-
-            }
+            ataque = true;
+            ataque_cool = 0;
 
         }
         else
         {
-            state = EnemyState.PATROL;
+
+            ataque_cool++;
+
+            if (ataque_cool >= ataque_delay)
+            {
+
+                ataque = false;
+                tempo_mira = 0;
+                reaction_timer = 0;
+
+                if (target != noone)
+                    state = EnemyState.CHASE;
+                else
+                    state = EnemyState.PATROL;
+
+            }
+
         }
 
-    break;
+    }
+    else
+    {
+        state = EnemyState.PATROL;
+    }
+
+break;
 
 }
 
@@ -310,3 +335,5 @@ else
 image_xscale = facing;
 
 #endregion
+
+show_debug_message(hpEnemy);

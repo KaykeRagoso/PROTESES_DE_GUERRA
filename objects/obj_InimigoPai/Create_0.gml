@@ -25,6 +25,22 @@ nao_cair_plataforma = true;
 
 #endregion
 
+#region Tiro
+shoot_range = 400;
+shoot_cooldown = 90;
+shoot_timer = 0;
+
+aim_speed = 0.08;
+
+aim_dir = 0;
+
+shot_inaccuracy = 6; // erro do tiro
+reaction_time = 30;
+reaction_timer = 0;
+
+target = obj_Player;	
+#endregion
+
 
 #region VIDA
 
