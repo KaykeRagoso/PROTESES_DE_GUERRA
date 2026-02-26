@@ -10,9 +10,10 @@
   },
   "defaultScriptType":1,
   "Folders":[
+    {"$GMFolder":"","%Name":"dialogo","folderPath":"folders/dialogo.yy","name":"dialogo","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"enemy2","folderPath":"folders/enemy2.yy","name":"enemy2","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"sprites","folderPath":"folders/enemy2/sprites.yy","name":"sprites","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"dialogo","folderPath":"folders/dialogo.yy","name":"dialogo","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"SistemasdeDialogos","folderPath":"folders/SistemasdeDialogos.yy","name":"SistemasdeDialogos","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"hud","folderPath":"folders/hud.yy","name":"hud","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"mapa_incopleto","folderPath":"folders/hud/mapa_incopleto.yy","name":"mapa_incopleto","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"poção","folderPath":"folders/hud/poção.yy","name":"poção","resourceType":"GMFolder","resourceVersion":"2.0",},

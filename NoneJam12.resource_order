@@ -1,8 +1,9 @@
 {
   "FolderOrderSettings":[
+    {"name":"dialogo","order":16,"path":"folders/dialogo.yy",},
     {"name":"enemy2","order":2,"path":"folders/enemy2.yy",},
     {"name":"sprites","order":3,"path":"folders/enemy2/sprites.yy",},
-    {"name":"dialogo","order":16,"path":"folders/dialogo.yy",},
+    {"name":"SistemasdeDialogos","order":17,"path":"folders/SistemasdeDialogos.yy",},
     {"name":"mapa_incopleto","order":2,"path":"folders/hud/mapa_incopleto.yy",},
     {"name":"vida","order":1,"path":"folders/hud/vida.yy",},
     {"name":"npc","order":8,"path":"folders/npc.yy",},
