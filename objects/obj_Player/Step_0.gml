@@ -440,7 +440,7 @@ case PlayerState.IDLE:
         else
         {
             // Charge 100% (vermelho) — loop entre frames 55 e 65
-            image_index += 0.15;
+            image_index += 0.30;
             if (image_index >= 66)
                 image_index = 55;
         }
