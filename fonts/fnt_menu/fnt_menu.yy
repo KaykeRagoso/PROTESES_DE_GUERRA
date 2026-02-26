@@ -293,7 +293,7 @@
   "name":"fnt_menu",
   "parent":{
     "name":"menu_principal",
-    "path":"folders/menu/menu_principal.yy",
+    "path":"folders/Objetos/menu/menu_principal.yy",
   },
   "pointRounding":0,
   "ranges":[

@@ -1,0 +1,1 @@
+global.menina_resgatada = false

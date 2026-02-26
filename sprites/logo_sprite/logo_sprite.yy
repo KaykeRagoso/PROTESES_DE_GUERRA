@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"pre_menu",
-    "path":"folders/menu/pre_menu.yy",
+    "path":"folders/Objetos/menu/pre_menu.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -11,7 +11,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"mapa_incopleto",
-    "path":"folders/hud/mapa_incopleto.yy",
+    "path":"folders/Objetos/hud/mapa_incopleto.yy",
   },
   "parentObjectId":null,
   "persistent":false,

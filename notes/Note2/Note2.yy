@@ -4,7 +4,7 @@
   "name":"Note2",
   "parent":{
     "name":"mapa_incopleto",
-    "path":"folders/hud/mapa_incopleto.yy",
+    "path":"folders/Objetos/hud/mapa_incopleto.yy",
   },
   "resourceType":"GMNotes",
   "resourceVersion":"2.0",

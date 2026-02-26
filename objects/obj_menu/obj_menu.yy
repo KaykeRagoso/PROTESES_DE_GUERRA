@@ -12,7 +12,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"menu_principal",
-    "path":"folders/menu/menu_principal.yy",
+    "path":"folders/Objetos/menu/menu_principal.yy",
   },
   "parentObjectId":null,
   "persistent":false,
