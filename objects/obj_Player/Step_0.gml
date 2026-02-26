@@ -67,6 +67,15 @@ var wall_l = place_meeting(x - 1, y, obj_Block);
 on_wall = 0;
 if (wall_r) on_wall =  1;
 if (wall_l) on_wall = -1;
+
+// Invencibilidade timer
+if (invincible) {
+    invincible_timer -= 1;
+    if (invincible_timer <= 0) {
+        invincible = false;
+    }
+}
+
 #endregion
 
 #region Combo Timer
@@ -95,8 +104,6 @@ if (weapon == WeaponType.GUN && state != PlayerState.CUTSCENE && state != Player
                 state = PlayerState.IDLE;
         }
     }
-
-
 
     if (key_attack_released)
     {
@@ -393,6 +400,41 @@ case PlayerState.ATTACK:
 
 break;
 
+
+// Hit
+case PlayerState.HIT:
+    vsp += grv;
+
+    hit_timer--;
+    if (hit_timer <= 0) {
+        state = grounded ? PlayerState.IDLE : PlayerState.AIR;
+    }
+break;
+
+
+// Death
+case PlayerState.DEATH:
+    hsp = 0;
+    vsp += grv;
+    if (vsp > maxFall) vsp = maxFall;
+
+    death_timer++;
+
+    // Gruda no chão feito um cadáver
+    if (place_meeting(x, y + 1, obj_Block)) {
+        vsp = 0;
+        // Empurra pra fora do chão caso esteja enterrado
+        while (place_meeting(x, y, obj_Block)) {
+            y--;
+        }
+
+        if (death_timer > 10 && !instance_exists(obj_game_over)) {
+            instance_create_layer(0, 0, "Instances", obj_game_over);
+            room_speed = room_speed_original;
+        }
+    }
+break;
+
 }
 #endregion
 
@@ -433,6 +475,9 @@ if (place_meeting(x, y + vsp, obj_Block))
 y += vsp;
 #endregion
 
+// Recalcula grounded APÓS as colisões para sprites e lógica de morte
+var grounded_final = place_meeting(x, y + 1, obj_Block);
+
 #region Sprites
 switch (state)
 {
@@ -458,7 +503,6 @@ case PlayerState.IDLE:
         }
         else if (gun_charge < gun_max_charge)
         {
-
             image_index = 2 + (gun_charge / (gun_max_charge - 1)) * 52;
         }
         else
@@ -503,8 +547,8 @@ case PlayerState.AIR:
             case WeaponType.BASIC: sprite_index = (facing==1) ? sprt_PlayerJumpandFallEsq       : sprt_PlayerJumpandFallDir;       break;
             case WeaponType.SWORD: sprite_index = (facing==1) ? sprt_PlayerJumpandfallEspadaEsq : sprt_PlayerJumpandfallEspadaDir; break;
             case WeaponType.GUN:   sprite_index = (facing==1) ? sprt_PlayerJumpandFallCanhaoEsq : sprt_PlayerJumpandFallCanhaoDir; break;
-		}
-			image_speed = image_number / 4;
+        }
+        image_speed = image_number / 4;
     }
 break;
 
@@ -533,20 +577,50 @@ case PlayerState.ATTACK:
     {
         switch (attack_type)
         {
-            case 1: sprite_index = (facing==1) ? sprt_PlayerAtaqueEspadaEsq      : sprt_PlayerAtaqueEspadaDir;      break;
-            case 2: sprite_index = (facing==1) ? sprt_PlayerAtaqueEspadaEsq      : sprt_PlayerAtaqueEspadaDir;      break;
-            case 3: sprite_index = (facing==1) ? sprt_PlayerAtaqueLoucoEspadaEsq : sprt_PlayerAtaqueLoucoEspadaDir; break;
+            case 1:
+            case 2:
+                sprite_index = (facing==1) ? sprt_PlayerAtaqueEspadaEsq : sprt_PlayerAtaqueEspadaDir;
+                image_speed = image_number / 2;
+            break;
+
+            case 3:
+                sprite_index = (facing==1) ? sprt_PlayerAtaqueLoucoEspadaEsq : sprt_PlayerAtaqueLoucoEspadaDir;
+                image_speed = image_number / 2;
+            break;
         }
     }
 
     if (weapon == WeaponType.GUN)
     {
-        // Na hora do disparo usa sprt_PlayerAtirou
-        // Se quiser sprites diferentes por nível, troque aqui
         sprite_index = (facing==1) ? sprt_PlayerAtirouEsq : sprt_PlayerAtirouDir;
+        image_speed = image_number / 2;
     }
+break;
 
-    image_speed = image_number / 2;
+case PlayerState.HIT:
+    switch (weapon)
+    {
+        case WeaponType.BASIC: sprite_index = (facing==1) ? sprt_PlayerHitEsq : sprt_PlayerHitDir; break;
+        case WeaponType.SWORD: sprite_index = (facing==1) ? sprt_PlayerHitEsqEspada : sprt_PlayerHitDirEspada; break;
+        case WeaponType.GUN:   sprite_index = (facing==1) ? sprt_PlayerHitEsqCanhao : sprt_PlayerHitDirCanhao; break;
+    }
+    image_speed = image_number / hit_duration;
+break;
+
+case PlayerState.DEATH:
+    if (!grounded_final || death_timer <= 10) {
+        sprite_index = (facing == 1) ? sprt_PlayerDeathEsq : sprt_PlayerDeathDir;
+        image_speed  = 0.2;
+    } else {
+        switch (weapon)
+        {
+            case WeaponType.BASIC: sprite_index = (facing==1) ? sprt_PlayerDownEsq         : sprt_PlayerDownDir;         break;
+            case WeaponType.SWORD: sprite_index = (facing==1) ? sprt_PlayerDownEsqEspada   : sprt_PlayerDownDirEspada;   break;
+            case WeaponType.GUN:   sprite_index = (facing==1) ? sprt_PlayerDownCanhaoEsq   : sprt_PlayerDownCanhaoDir;   break;
+        }
+        image_speed = 0;
+        image_index = 0;
+    }
 break;
 
 }

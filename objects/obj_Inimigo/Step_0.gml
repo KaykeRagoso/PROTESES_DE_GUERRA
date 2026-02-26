@@ -335,5 +335,3 @@ else
 image_xscale = facing;
 
 #endregion
-
-show_debug_message(hpEnemy);

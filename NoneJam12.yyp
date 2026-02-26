@@ -110,7 +110,6 @@
     {"id":{"name":"obj_parallax","path":"objects/obj_parallax/obj_parallax.yy",},},
     {"id":{"name":"obj_Player","path":"objects/obj_Player/obj_Player.yy",},},
     {"id":{"name":"obj_pre_menu","path":"objects/obj_pre_menu/obj_pre_menu.yy",},},
-    {"id":{"name":"obj_projetil_inimigo","path":"objects/obj_projetil_inimigo/obj_projetil_inimigo.yy",},},
     {"id":{"name":"obj_Soldado","path":"objects/obj_Soldado/obj_Soldado.yy",},},
     {"id":{"name":"obj_SuperSoldadoArma","path":"objects/obj_SuperSoldadoArma/obj_SuperSoldadoArma.yy",},},
     {"id":{"name":"obj_SuperSoldadoSemArma","path":"objects/obj_SuperSoldadoSemArma/obj_SuperSoldadoSemArma.yy",},},

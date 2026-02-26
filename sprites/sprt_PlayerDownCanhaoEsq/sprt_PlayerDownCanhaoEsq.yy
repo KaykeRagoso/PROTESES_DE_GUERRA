@@ -23,7 +23,7 @@
   ],
   "name":"sprt_PlayerDownCanhaoEsq",
   "nineSlice":null,
-  "origin":4,
+  "origin":9,
   "parent":{
     "name":"Esq",
     "path":"folders/Sprites/Player/Canhao/Hit&Morte/Esq.yy",
@@ -76,7 +76,7 @@
     "visibleRange":null,
     "volume":1.0,
     "xorigin":43,
-    "yorigin":6,
+    "yorigin":-20,
   },
   "swatchColours":null,
   "swfPrecision":0.5,

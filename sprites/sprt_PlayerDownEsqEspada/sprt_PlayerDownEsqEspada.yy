@@ -23,7 +23,7 @@
   ],
   "name":"sprt_PlayerDownEsqEspada",
   "nineSlice":null,
-  "origin":4,
+  "origin":9,
   "parent":{
     "name":"Esq",
     "path":"folders/Sprites/Player/Espada/Hit&Morte/Esq.yy",
@@ -76,7 +76,7 @@
     "visibleRange":null,
     "volume":1.0,
     "xorigin":48,
-    "yorigin":6,
+    "yorigin":-20,
   },
   "swatchColours":null,
   "swfPrecision":0.5,
