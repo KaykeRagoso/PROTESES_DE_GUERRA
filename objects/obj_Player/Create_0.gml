@@ -12,6 +12,7 @@ jump_force_gun   = -9;
 jump_force_sword = -12;
 jump_force       = jump_force_basic;
 
+som_atual = noone;
 
 //Direção e Dash
 facing           = 1;
@@ -100,7 +101,6 @@ gun_hold_timer = 0;
 can_shoot      = false;
 is_charging    = false;
 
-room_speed_original = room_speed;
 
 hit_timer        = 0;
 hit_duration     = 20; // frames no estado de hit
