@@ -7,7 +7,8 @@ enum EnemyState {
 
 state = EnemyState.PATROL;
 
-// MOVIMENTO
+#region MOVIMENTO
+
 spdEnemy = 1;
 spdEnemyMax = 2.5;
 
@@ -20,11 +21,19 @@ maxFall = 6;
 facing = 1;
 move_dir = 1;
 
-// VIDA
+#endregion
+
+
+#region VIDA
+
 hpEnemy = 3;
 dropped = false;
 
-// COMBATE
+#endregion
+
+
+#region COMBATE
+
 target = noone;
 
 ataque = false;
@@ -34,27 +43,43 @@ ataque_delay = 60;
 recoil_force = 0;
 recoil_decay = 0.15;
 
-// VISÃO
+#endregion
+
+
+#region VISÃO
+
 dist_visao = 300;
 dist_tiro  = 200;
+dist_min_tiro = 80;
+
 mostrar_alerta = 0;
 tempo_perda_alvo = 0;
 
+#endregion
 
-// FUNÇÕES
+
+#region FUNÇÕES
+
 function checkDeath(){
+
     if (hpEnemy <= 0 && !dropped){
         dropItem();
         dropped = true;
         state = EnemyState.DEATH;	
     }
+
 }
+
 
 function aplicarRecoil(_dir, _forca){
+
     recoil_force = lengthdir_x(_forca, _dir + 180);
+
 }
 
+
 function dropItem(){
+
     var chance = irandom_range(1,100);
 	
     if (chance <= 10){
@@ -63,4 +88,7 @@ function dropItem(){
     else if (chance <= 25){
         show_debug_message("Dropou Munição");
     }
+
 }
+
+#endregion
