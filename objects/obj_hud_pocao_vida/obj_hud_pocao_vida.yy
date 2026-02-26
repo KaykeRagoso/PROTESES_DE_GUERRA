@@ -11,7 +11,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"poção",
-    "path":"folders/hud/poção.yy",
+    "path":"folders/Objetos/hud/poção.yy",
   },
   "parentObjectId":null,
   "persistent":false,

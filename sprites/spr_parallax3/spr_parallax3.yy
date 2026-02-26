@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"parallax",
-    "path":"folders/parallax.yy",
+    "path":"folders/Objetos/parallax.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

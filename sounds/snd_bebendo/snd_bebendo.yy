@@ -15,7 +15,7 @@
   "name":"snd_bebendo",
   "parent":{
     "name":"poção",
-    "path":"folders/hud/poção.yy",
+    "path":"folders/Objetos/hud/poção.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

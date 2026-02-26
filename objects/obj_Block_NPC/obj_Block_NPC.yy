@@ -6,8 +6,8 @@
   "name":"obj_Block_NPC",
   "overriddenProperties":[],
   "parent":{
-    "name":"NoneJam12",
-    "path":"NoneJam12.yyp",
+    "name":"npc1",
+    "path":"folders/Objetos/npc/npc1.yy",
   },
   "parentObjectId":null,
   "persistent":false,

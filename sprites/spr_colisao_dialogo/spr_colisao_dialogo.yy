@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"NoneJam12",
-    "path":"NoneJam12.yyp",
+    "name":"npc1",
+    "path":"folders/Objetos/npc/npc1.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

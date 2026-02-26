@@ -33,7 +33,7 @@
   "origin":4,
   "parent":{
     "name":"npc1",
-    "path":"folders/npc/npc1.yy",
+    "path":"folders/Objetos/npc/npc1.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"poção",
-    "path":"folders/hud/poção.yy",
+    "path":"folders/Objetos/hud/poção.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"sistema_de_luz_basico",
-    "path":"folders/sistema_de_luz_basico.yy",
+    "path":"folders/Objetos/sistema_de_luz_basico.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",
