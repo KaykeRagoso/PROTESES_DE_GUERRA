@@ -87,7 +87,7 @@
     {"id":{"name":"obj_game_over","path":"objects/obj_game_over/obj_game_over.yy",},},
     {"id":{"name":"obj_hud_pocao_vida","path":"objects/obj_hud_pocao_vida/obj_hud_pocao_vida.yy",},},
     {"id":{"name":"obj_inimigo_ia","path":"objects/obj_inimigo_ia/obj_inimigo_ia.yy",},},
-    {"id":{"name":"obj_Inimigo","path":"objects/obj_Inimigo/obj_Inimigo.yy",},},
+    {"id":{"name":"obj_InimigoPai","path":"objects/obj_InimigoPai/obj_InimigoPai.yy",},},
     {"id":{"name":"obj_life","path":"objects/obj_life/obj_life.yy",},},
     {"id":{"name":"obj_luz_controle","path":"objects/obj_luz_controle/obj_luz_controle.yy",},},
     {"id":{"name":"obj_mapa","path":"objects/obj_mapa/obj_mapa.yy",},},

@@ -538,7 +538,7 @@ function _hitEnemies(_x1, _y1, _x2, _y2, _dmg)
     var ry1 = y + _y1;
     var ry2 = y + _y2;
 
-    var _hit = collision_rectangle(rx1, ry1, rx2, ry2, obj_Inimigo, false, true);
+    var _hit = collision_rectangle(rx1, ry1, rx2, ry2, obj_InimigoPai, false, true);
     if (_hit != noone)
         with (_hit) { hpEnemy -= _dmg; }
 }

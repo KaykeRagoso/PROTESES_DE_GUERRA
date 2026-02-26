@@ -93,6 +93,6 @@ function shootBullet(_sprite, _dir, _spd, _dmg, _offset_x, _offset_y, _onehit)
     b.spd          = _spd;
     b.damage       = _dmg;
     b.one_hit      = _onehit;
-    b.hit_enemy    = obj_Inimigo;
+    b.hit_enemy    = obj_InimigoPai;
     return b;
 }

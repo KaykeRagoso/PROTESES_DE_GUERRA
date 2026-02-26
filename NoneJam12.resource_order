@@ -55,7 +55,7 @@
     {"name":"obj_Camera","order":2,"path":"objects/obj_Camera/obj_Camera.yy",},
     {"name":"obj_fade_in_menu","order":6,"path":"objects/obj_fade_in_menu/obj_fade_in_menu.yy",},
     {"name":"obj_inimigo_ia","order":1,"path":"objects/obj_inimigo_ia/obj_inimigo_ia.yy",},
-    {"name":"obj_Inimigo","order":3,"path":"objects/obj_Inimigo/obj_Inimigo.yy",},
+    {"name":"obj_InimigoPai","order":3,"path":"objects/obj_InimigoPai/obj_InimigoPai.yy",},
     {"name":"obj_luz_controle","order":1,"path":"objects/obj_luz_controle/obj_luz_controle.yy",},
     {"name":"obj_menu","order":3,"path":"objects/obj_menu/obj_menu.yy",},
     {"name":"obj_Player","order":4,"path":"objects/obj_Player/obj_Player.yy",},
