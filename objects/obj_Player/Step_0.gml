@@ -239,9 +239,12 @@ case PlayerState.AIR:
     {
         if (on_wall != 0 && vsp > 0)
             vsp = min(vsp, wall_speed_limit);
+			
 
         if (on_wall != 0 && key_jump)
         {
+			// Ativa o tremor do personagem enquanto desliza
+        
             vsp          = jump_force;
             hsp          = -on_wall * walksp * 2.5;
             facing       = -on_wall;
@@ -274,6 +277,7 @@ case PlayerState.DASH:
         dash_delay_timer--;
         hsp = 0;
         vsp = 0;
+		
     }
     else
     {
@@ -589,4 +593,29 @@ function _hitEnemies(_x1, _y1, _x2, _y2, _dmg)
     var _hit = collision_rectangle(rx1, ry1, rx2, ry2, obj_InimigoPai, false, true);
     if (_hit != noone)
         with (_hit) { hpEnemy -= _dmg; }
+}
+
+
+if (state == PlayerState.RUN) {
+
+    
+        // correr
+        if (som_atual != snd_passos_terra) {
+			 
+            audio_stop_sound(som_atual);
+            som_atual = snd_passos_terra;
+            audio_play_sound(snd_passos_terra, 1, true);
+        }
+} else {
+    // parou de andar
+    if (som_atual != noone) {
+        audio_stop_sound(som_atual);
+        som_atual = noone;
+    }
+}
+if keyboard_check_pressed(vk_shift){
+	if key_dash = true{
+		if (dash_delay_timer > 0)
+		audio_play_sound(snd_dash,10,false)
+	}
 }

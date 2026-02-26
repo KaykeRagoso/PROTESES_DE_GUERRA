@@ -4,7 +4,8 @@ vsp    = 0;
 grv    = 0.4;
 walksp = 3;
 
-
+// Ativa o tremor do personagem enquanto desliza
+        
 //Pulo
 jump_force_basic = -9;
 jump_force_gun   = -9;
@@ -103,3 +104,5 @@ function shootBullet(_sprite, _dir, _spd, _dmg, _offset_x, _offset_y, _onehit)
     b.hit_enemy    = obj_InimigoPai;
     return b;
 }
+
+som_atual = noone;
