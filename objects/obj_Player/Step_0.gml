@@ -14,6 +14,9 @@ var key_kick           = keyboard_check_pressed(ord("X"));
 var key_spin           = keyboard_check_pressed(ord("C"));
 
 var move = key_right - key_left;
+
+// decrementa cooldown de dash a cada frame
+if (dash_cooldown_timer > 0) dash_cooldown_timer--;
 #endregion
 
 
@@ -36,8 +39,28 @@ if (key_switchWeapon && state != PlayerState.CUTSCENE)
 #endregion
 
 #region Detecções
-var grounded = place_meeting(x, y + 1, obj_Block);
+// chão / rampas
+var grounded = false;
+var ramp_inst = noone;
 
+// bloco horizontal normal
+if (place_meeting(x, y + 1, obj_Block))
+    grounded = true;
+
+//// checa se estamos sobre uma rampa (usa um pixel adiante para "colocar o pé" na inclinação)
+//ramp_inst = instance_place(x, y + 1, obj_RampaDir);
+//if (ramp_inst != noone)
+//{
+//    grounded = true;
+//}
+//else
+//{
+//    ramp_inst = instance_place(x, y + 1, obj_RampaEsq);
+//    if (ramp_inst != noone)
+//        grounded = true;
+//}
+
+// paredes (não são afetadas por rampas)
 var wall_r = place_meeting(x + 1, y, obj_Block);
 var wall_l = place_meeting(x - 1, y, obj_Block);
 
@@ -73,9 +96,7 @@ if (weapon == WeaponType.GUN && state != PlayerState.CUTSCENE && state != Player
         }
     }
 
-    // No máximo — trava o charge, não cancela
-    if (is_charging && gun_charge >= gun_max_charge)
-        gun_charge = gun_max_charge;
+
 
     if (key_attack_released)
     {
@@ -108,20 +129,6 @@ if (weapon == WeaponType.GUN && state != PlayerState.CUTSCENE && state != Player
 
 #region Cooldown de Ataque
 if (attack_cooldown > 0) attack_cooldown--;
-#endregion
-
-#region Invencibilidade
-
-if (invencivel)
-{
-    inv_timer--;
-
-    if (inv_timer <= 0)
-    {
-        invencivel = false;
-    }
-}
-
 #endregion
 
 #region State Machine
@@ -196,7 +203,10 @@ case PlayerState.RUN:
         state = PlayerState.AIR;
     }
 
-    if (key_dash && can_dash) state = PlayerState.DASH;
+    if (key_dash && can_dash && dash_cooldown_timer <= 0) {
+        state = PlayerState.DASH;
+        dash_delay_timer = dash_delay;
+    }
 
     if (weapon != WeaponType.GUN)
     {
@@ -248,7 +258,10 @@ case PlayerState.AIR:
         state    = PlayerState.IDLE;
     }
 
-    if (key_dash && can_dash) state = PlayerState.DASH;
+    if (key_dash && can_dash && dash_cooldown_timer <= 0) {
+        state = PlayerState.DASH;
+        dash_delay_timer = dash_delay;
+    }
 
 break;
 
@@ -278,6 +291,8 @@ case PlayerState.DASH:
         {
             state            = PlayerState.AIR;
             dash_delay_timer = 0;
+            // iniciar cooldown para próximo dash
+            dash_cooldown_timer = dash_cooldown;
         }
     }
 
@@ -374,20 +389,6 @@ case PlayerState.ATTACK:
 
 break;
 
-case PlayerState.DAMAGE:
-
-    hsp = lengthdir_x(knockback_force, knockback_dir);
-    vsp = -2;
-
-    knockback_force = lerp(knockback_force, 0, 0.2);
-
-    if (knockback_force < 0.2)
-    {
-        state = PlayerState.AIR;
-    }
-
-break;
-
 }
 #endregion
 
@@ -399,6 +400,25 @@ if (place_meeting(x + hsp, y, obj_Block))
     hsp = 0;
 }
 x += hsp;
+
+// depois do movimento horizontal, verifica se entramos numa rampa
+if (instance_exists(ramp_inst))
+{
+    // calcula a altura do "chão" dentro da rampa com base na posição x
+    var px      = x;
+    var rel     = clamp(px - ramp_inst.x + ramp_inst.slope_length/2, 0, ramp_inst.slope_length);
+    var floorY;
+    if (ramp_inst.slope_dir == 1)
+        floorY = ramp_inst.y - ramp_inst.slope_height/2 + rel;
+    else
+        floorY = ramp_inst.y + ramp_inst.slope_height/2 - rel;
+
+    if (y > floorY)
+    {
+        y = floorY;
+        vsp = 0;
+    }
+}
 
 if (place_meeting(x, y + vsp, obj_Block))
 {
