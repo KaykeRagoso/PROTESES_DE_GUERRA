@@ -12,12 +12,12 @@ if (state == EnemyState.DEATH)
 
 #region DETECÇÃO DO PLAYER
 
-var player = instance_nearest(x,y,obj_Player);
+var player = instance_nearest(x, y, obj_Player);
 
 if (player != noone)
 {
 
-    var distPlayer = point_distance(x,y,player.x,player.y);
+    var distPlayer = point_distance(x, y, player.x, player.y);
 
     var parede = collision_line(
         x, y - 10,
@@ -53,7 +53,10 @@ if (player != noone)
 
 #endregion
 
-#region State Machine
+
+
+#region STATE MACHINE
+
 switch (state)
 {
 
@@ -65,14 +68,18 @@ switch (state)
         var frontX = x + (facing * 8);
         var frontY = y + 16;
 
-        if (!place_meeting(frontX, frontY, obj_Block) ||
-            place_meeting(x + facing, y, obj_Block))
+        var parede = place_meeting(x + facing, y, obj_Block);
+        var chao_frente = place_meeting(frontX, frontY, obj_Block);
+
+        if (parede || (nao_cair_plataforma && !chao_frente))
         {
             facing *= -1;
         }
 
         if (target != noone)
+        {
             state = EnemyState.CHASE;
+        }
 
     break;
 
@@ -80,25 +87,29 @@ switch (state)
 
     case EnemyState.CHASE:
 
-        if (target != noone)
+        if (target != noone && instance_exists(target))
         {
+
             var dx = target.x - x;
 
             facing = sign(dx);
             hspdEnemy = spdEnemyMax * facing;
 
-            // PULO AUTOMÁTICO MELHORADO
             if (place_meeting(x + hspdEnemy, y, obj_Block)
-                && place_meeting(x, y + 1, obj_Block))
+            && place_meeting(x, y + 1, obj_Block))
             {
                 vspdEnemy = -7.5;
             }
 
-            if (point_distance(x, y, target.x, target.y) < dist_tiro)
+            var dist = point_distance(x, y, target.x, target.y);
+
+            if (dist < dist_tiro && dist > dist_min_tiro)
             {
                 state = EnemyState.ATTACK;
                 ataque = false;
+                tempo_mira = 0;
             }
+
         }
         else
         {
@@ -111,15 +122,22 @@ switch (state)
 
     case EnemyState.ATTACK:
 
-        if (recoil_force == 0)
-            hspdEnemy = 0;
+        hspdEnemy = 0;
 
-        if (target != noone)
+        if (target != noone && instance_exists(target))
         {
+
+            tempo_mira++;
+
+            if (tempo_mira < tempo_mira_max)
+                break;
+
             var dir = point_direction(x, y, target.x, target.y);
+            dir += random_range(-erro_tiro, erro_tiro);
 
             if (!ataque)
             {
+
                 var bullet = instance_create_layer(
                     x + (facing * 12),
                     y - 10,
@@ -131,27 +149,35 @@ switch (state)
                 {
                     bullet.direction = dir;
                     bullet.speed = 5;
+                    bullet.owner = id;
                 }
 
                 aplicarRecoil(dir, 4);
 
                 ataque = true;
                 ataque_cool = 0;
+
             }
             else
             {
+
                 ataque_cool++;
 
                 if (ataque_cool >= ataque_delay)
                 {
+
                     ataque = false;
+                    tempo_mira = 0;
 
                     if (target != noone)
                         state = EnemyState.CHASE;
                     else
                         state = EnemyState.PATROL;
+
                 }
+
             }
+
         }
         else
         {
@@ -159,82 +185,128 @@ switch (state)
         }
 
     break;
+
 }
+
 #endregion
 
-#region Recoil
+
+
+#region RECOIL
+
 if (recoil_force != 0)
 {
+
     hspdEnemy = recoil_force;
 
     recoil_force = lerp(recoil_force, 0, recoil_decay);
 
     if (abs(recoil_force) < 0.05)
         recoil_force = 0;
+
 }
+
 #endregion
 
-#region Gravidade
+
+
+#region GRAVIDADE
+
 vspdEnemy += grv;
 
 if (vspdEnemy > maxFall)
     vspdEnemy = maxFall;
+
 #endregion
 
-#region Colisão
+
+
+#region COLISÃO HORIZONTAL
+
 if (place_meeting(x + hspdEnemy, y, obj_Block))
 {
+
     while (!place_meeting(x + sign(hspdEnemy), y, obj_Block))
         x += sign(hspdEnemy);
 
     hspdEnemy = 0;
+
 }
 
 x += hspdEnemy;
 
+#endregion
+
+
+
+#region COLISÃO VERTICAL
 
 if (place_meeting(x, y + vspdEnemy, obj_Block))
 {
+
     while (!place_meeting(x, y + sign(vspdEnemy), obj_Block))
         y += sign(vspdEnemy);
 
     vspdEnemy = 0;
+
 }
 
 y += vspdEnemy;
+
 #endregion
 
-#region Troca de Sprite
-if (state == EnemyState.DEATH) {
+
+
+#region SPRITE
+
+if (state == EnemyState.DEATH)
+{
+
     sprite_index = spr_enemy_death2;
     image_speed = 0.2;
-    image_index = min(image_index, image_number - 1);
+
 }
-else if (!place_meeting(x, y + 1, obj_Block)) {
-    // Inimigo no ar (pulo ou queda)
+else if (!place_meeting(x, y + 1, obj_Block))
+{
+
     sprite_index = spr_enemy_jump;
     image_speed = 0.2;
+
 }
-else {
-    switch(state){
+else
+{
+
+    switch(state)
+    {
+
         case EnemyState.PATROL:
         case EnemyState.CHASE:
+
             sprite_index = spr_enemy_run;
-            image_speed = image_number / 1;
+            image_speed = 0.2;
+
         break;
+
 
         case EnemyState.ATTACK:
+
             sprite_index = spr_enemy_shoting;
             image_speed = 0.2;
+
         break;
+
 
         default:
+
             sprite_index = spr_enemy_idle;
             image_speed = 0.15;
+
         break;
+
     }
+
 }
 
-// Virar sprite de acordo com a direção
 image_xscale = facing;
+
 #endregion

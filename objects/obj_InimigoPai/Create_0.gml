@@ -21,6 +21,8 @@ maxFall = 6;
 facing = 1;
 move_dir = 1;
 
+nao_cair_plataforma = true;
+
 #endregion
 
 
@@ -39,6 +41,11 @@ target = noone;
 ataque = false;
 ataque_cool = 0;
 ataque_delay = 60;
+
+tempo_mira = 0;
+tempo_mira_max = 20;
+
+erro_tiro = 6;
 
 recoil_force = 0;
 recoil_decay = 0.15;
@@ -70,13 +77,11 @@ function checkDeath(){
 
 }
 
-
 function aplicarRecoil(_dir, _forca){
 
     recoil_force = lengthdir_x(_forca, _dir + 180);
 
 }
-
 
 function dropItem(){
 
@@ -88,6 +93,18 @@ function dropItem(){
     else if (chance <= 25){
         show_debug_message("Dropou Munição");
     }
+
+}
+
+function takeDamage(_dano,_dir){
+
+    hpEnemy -= _dano;
+
+    aplicarRecoil(_dir,5);
+
+    state = EnemyState.CHASE;
+
+    mostrar_alerta = 40;
 
 }
 
