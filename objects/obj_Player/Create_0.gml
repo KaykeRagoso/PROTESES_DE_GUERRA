@@ -69,7 +69,6 @@ attack_duration     = 15;
 attack_cooldown     = 0;
 attack_cooldown_max = 5;
 
-
 //Combo
 combo_step     = 0;
 combo_timer    = 0;
@@ -83,17 +82,50 @@ gun_hold_timer = 0;   // começa em 0, não 30
 can_shoot      = false;
 is_charging    = false;
 
+//Vida 
+hpPlayer = 2;
+hpMax    = 2;
+
+invencivel      = false;
+inv_timer       = 0;
+inv_duration    = 30;
+
+knockback_force = 0;
+knockback_dir   = 0;
+
 
 //Funções
 function shootBullet(_sprite, _dir, _spd, _dmg, _offset_x, _offset_y, _onehit)
 {
-    var b          = instance_create_layer(x + _offset_x, y + _offset_y, "Instances", obj_Bullet);
+    var b          = instance_create_layer(x + _offset_x, y + _offset_y, "Instances", obj_EnemyBullet);
     b.sprite_index = _sprite;
     b.image_speed  = 0.2;
     b.dir          = _dir;
     b.spd          = _spd;
     b.damage       = _dmg;
     b.one_hit      = _onehit;
-    b.hit_enemy    = obj_Inimigo;
+    b.hit_enemy    = obj_InimigoPai;
     return b;
+}
+
+function takeDamagePlayer(_dano, _dir)
+{
+
+    if (invencivel) return;
+
+    hpPlayer -= _dano;
+
+    invencivel = true;
+    inv_timer  = inv_duration;
+
+    knockback_dir   = _dir;
+    knockback_force = 4;
+
+    state = PlayerState.DAMAGE;
+
+    if (hpPlayer <= 0)
+    {
+        state = PlayerState.DEATH;
+    }
+
 }

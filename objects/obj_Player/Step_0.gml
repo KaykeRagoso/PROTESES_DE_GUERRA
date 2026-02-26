@@ -110,6 +110,20 @@ if (weapon == WeaponType.GUN && state != PlayerState.CUTSCENE && state != Player
 if (attack_cooldown > 0) attack_cooldown--;
 #endregion
 
+#region Invencibilidade
+
+if (invencivel)
+{
+    inv_timer--;
+
+    if (inv_timer <= 0)
+    {
+        invencivel = false;
+    }
+}
+
+#endregion
+
 #region State Machine
 switch (state)
 {
@@ -360,6 +374,20 @@ case PlayerState.ATTACK:
 
 break;
 
+case PlayerState.DAMAGE:
+
+    hsp = lengthdir_x(knockback_force, knockback_dir);
+    vsp = -2;
+
+    knockback_force = lerp(knockback_force, 0, 0.2);
+
+    if (knockback_force < 0.2)
+    {
+        state = PlayerState.AIR;
+    }
+
+break;
+
 }
 #endregion
 
@@ -406,19 +434,13 @@ case PlayerState.IDLE:
         }
         else if (gun_charge < gun_max_charge)
         {
-            // Charge ativo — sincroniza frames 2 ao 54 com gun_charge
-            // Frame 2-7:   tiro fraco pequeno aparece
-            // Frame 8-10:  próximo tiro
-            // Frame 10-19: efeitos de energia
-            // Frame 20-28: tiro cresce
-            // Frame 29-46: pisca azul
-            // Frame 47-54: pisca roxo
+
             image_index = 2 + (gun_charge / (gun_max_charge - 1)) * 52;
         }
         else
         {
             // Charge 100% (vermelho) — loop entre frames 55 e 65
-            image_index += 0.15;
+            image_index += 0.30;
             if (image_index >= 66)
                 image_index = 55;
         }
@@ -544,7 +566,7 @@ function _hitEnemies(_x1, _y1, _x2, _y2, _dmg)
     var ry1 = y + _y1;
     var ry2 = y + _y2;
 
-    var _hit = collision_rectangle(rx1, ry1, rx2, ry2, obj_Inimigo, false, true);
+    var _hit = collision_rectangle(rx1, ry1, rx2, ry2, obj_InimigoPai, false, true);
     if (_hit != noone)
         with (_hit) { hpEnemy -= _dmg; }
 }
