@@ -13,8 +13,8 @@ if (alpha > 0.5) {
     //texto principal
     draw_text_transformed(display_get_gui_width()/2, display_get_gui_height()/2 - 20, "A GUERRA CONTINUA SEM VOCE...", 2, 2, 0);
     
-    //lsubtexto piscando
-    if (pode_reiniciar) {
+    //subtexto piscando
+    if (pode_reiniciar && blink_timer < blink_speed) {
         draw_set_color(c_white);
         draw_text(display_get_gui_width()/2, display_get_gui_height()/2 + 40, "Pressione 'R' para tentar novamente");
     }

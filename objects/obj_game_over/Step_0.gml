@@ -1,8 +1,12 @@
 // Aumenta o escurecimento da tela gradualmente
 alpha = min(alpha + 0.02, 1); 
 
-// Reiniciar a fase
+// Reiniciar a fase e piscar texto
 if (pode_reiniciar) {
+    blink_timer++;
+    if (blink_timer >= blink_speed * 2) {
+        blink_timer = 0;
+    }
     if (keyboard_check_pressed(ord("R")) || keyboard_check_pressed(vk_space)) {
         show_debug_message("RESTART CHAMADO");
         global.vida_atual = 100;
@@ -14,6 +18,6 @@ if (pode_reiniciar) {
             obj_Dialogo.npc_dono      = noone;
         }
         instance_destroy();
-        room_restart();
+        game_restart();
     }
 }
