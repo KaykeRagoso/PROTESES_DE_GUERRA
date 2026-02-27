@@ -2,6 +2,7 @@ if global.menina_resgatada = true{
 if instance_place(x,y,obj_Player){
 	instance_destroy()
 	instance_create_layer(0, 0, "Instances", obj_fade_missao1);
+	
 }
 }
 

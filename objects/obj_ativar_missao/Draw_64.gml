@@ -14,3 +14,4 @@ if (mostrar_interacao = 1) {
 
     draw_set_alpha(1);
 }
+
