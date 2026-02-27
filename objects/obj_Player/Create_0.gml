@@ -3,7 +3,7 @@ hsp    = 0;
 vsp    = 0;
 grv    = 0.4;
 walksp = 3;
-
+// testenfdsd
 // Ativa o tremor do personagem enquanto desliza
         
 //Pulo
