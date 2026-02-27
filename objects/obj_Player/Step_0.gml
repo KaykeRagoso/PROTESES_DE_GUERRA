@@ -11,14 +11,13 @@ var key_attack_pressed = keyboard_check_pressed(ord("Z"));
 var key_attack_released= keyboard_check_released(ord("Z"));
 
 var key_kick           = keyboard_check_pressed(ord("X"));
-//var key_spin           = keyboard_check_pressed(ord("C"));
+var key_spin           = keyboard_check_pressed(ord("C"));
 
 var move = key_right - key_left;
 
 // decrementa cooldown de dash a cada frame
 if (dash_cooldown_timer > 0) dash_cooldown_timer--;
 #endregion
-
 
 #region Switch Weapon
 if (key_switchWeapon && state != PlayerState.CUTSCENE)
@@ -182,12 +181,12 @@ case PlayerState.IDLE:
 
     if (weapon != WeaponType.GUN)
     {
-        if ((key_attack_pressed || key_kick) && attack_cooldown <= 0)
+        if ((key_attack_pressed || key_kick || key_spin) && attack_cooldown <= 0)
         {
             state           = PlayerState.ATTACK;
             attack_timer    = 0;
             attack_cooldown = attack_cooldown_max;
-            _setAttackType(weapon, key_attack_pressed, key_kick);
+            _setAttackType(weapon, key_attack_pressed, key_kick, key_spin);
         }
     }
 
@@ -627,7 +626,7 @@ break;
 #endregion
 
 /// Define attack_type com base na arma e tecla pressionada
-function _setAttackType(_wpn, _atk, _kick)
+function _setAttackType(_wpn, _atk, _kick, _spin)
 {
     switch (_wpn)
     {
@@ -640,7 +639,7 @@ function _setAttackType(_wpn, _atk, _kick)
                 attack_type = combo_step;
             }
             if (_kick) attack_type = 3;
-            //if (_spin) attack_type = 4;
+            if (_spin) attack_type = 4; 
         break;
 
         case WeaponType.SWORD:
@@ -652,6 +651,7 @@ function _setAttackType(_wpn, _atk, _kick)
                 attack_type = combo_step;
             }
             if (_kick) attack_type = 3;
+            // sem _spin aqui
         break;
     }
 }
