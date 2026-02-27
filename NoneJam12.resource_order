@@ -57,7 +57,7 @@
   ],
   "ResourceOrderSettings":[
     {"name":"fnt_titulo","order":1,"path":"fonts/fnt_titulo/fnt_titulo.yy",},
-    {"name":"fnt_troca","order":17,"path":"fonts/fnt_troca/fnt_troca.yy",},
+    {"name":"fnt_troca","order":1,"path":"fonts/fnt_troca/fnt_troca.yy",},
     {"name":"Note2","order":1,"path":"notes/Note2/Note2.yy",},
     {"name":"obs_luz_basica","order":2,"path":"notes/obs_luz_basica/obs_luz_basica.yy",},
     {"name":"obj_ativar_missao","order":1,"path":"objects/obj_ativar_missao/obj_ativar_missao.yy",},

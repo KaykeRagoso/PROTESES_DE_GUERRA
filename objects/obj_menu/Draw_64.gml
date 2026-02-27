@@ -16,13 +16,13 @@ var title_y = 120;
 var glitch = random_range(-2, 2);
 
 draw_set_color(c_aqua);
-draw_text(100 + menu_x_offset + glitch, title_y, "PROJECT: CHRONOS");
+draw_text(100 + menu_x_offset + glitch, title_y, "PRÓTESES DE GUERRA");
 
 draw_set_color(c_red);
-draw_text(100 + menu_x_offset - glitch, title_y, "PROJECT: CHRONOS");
+draw_text(100 + menu_x_offset - glitch, title_y, "PRÓTESES DE GUERRA");
 
 draw_set_color(c_white);
-draw_text(100 + menu_x_offset, title_y, "PROJECT: CHRONOS");
+draw_text(100 + menu_x_offset, title_y, "PRÓTESES DE GUERRA");
 
 // ==========================================
 // OPÇÕES DO MENU
