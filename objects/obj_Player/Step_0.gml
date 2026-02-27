@@ -53,19 +53,6 @@ var ramp_inst = noone;
 if (place_meeting(x, y + 1, obj_Block))
     grounded = true;
 
-//// checa se estamos sobre uma rampa (usa um pixel adiante para "colocar o pé" na inclinação)
-//ramp_inst = instance_place(x, y + 1, obj_RampaDir);
-//if (ramp_inst != noone)
-//{
-//    grounded = true;
-//}
-//else
-//{
-//    ramp_inst = instance_place(x, y + 1, obj_RampaEsq);
-//    if (ramp_inst != noone)
-//        grounded = true;
-//}
-
 // paredes (não são afetadas por rampas)
 var wall_r = place_meeting(x + 1, y, obj_Block);
 var wall_l = place_meeting(x - 1, y, obj_Block);
@@ -477,12 +464,11 @@ case PlayerState.DEATH:
         while (place_meeting(x, y, obj_Block)) {
             y--;
         }
-
-        if (death_timer > 10 && !instance_exists(obj_game_over)) {
-            instance_create_layer(0, 0, "Instances", obj_game_over);
-			show_debug_message("DEATH - death_timer: " + string(death_timer) + " | vida: " + string(global.vida_atual));
-            exit;
-        }
+    }
+    
+    // CORREÇÃO: Criar obj_game_over apenas UMA VEZ no frame 60
+    if (death_timer == 60 && !instance_exists(obj_game_over)) {
+        instance_create_layer(0, 0, "Instances", obj_game_over);
     }
 break;
 
