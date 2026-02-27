@@ -3,8 +3,8 @@ hsp    = 0;
 vsp    = 0;
 grv    = 0.4;
 walksp = 3;
-// testenfdsd
-// Ativa o tremor do personagem enquanto desliza
+
+charge_sound_inst = noone;
         
 //Pulo
 jump_force_basic = -9;
@@ -96,7 +96,7 @@ combo_step     = 0;
 combo_timer    = 0;
 combo_max_time = 20;
 combo_zx_timer = 0;
-combo_zx_window = 60; // janela de tempo pra apertar X após Z
+combo_zx_window = 45; // janela de tempo pra apertar X após Z
 combo_zx_ready = false;
 
 //Moeda

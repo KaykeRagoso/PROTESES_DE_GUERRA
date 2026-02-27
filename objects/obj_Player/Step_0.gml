@@ -34,6 +34,12 @@ if (key_switchWeapon && state != PlayerState.CUTSCENE)
 
     is_charging = false;
     gun_charge  = 0;
+
+    if (charge_sound_inst != noone)
+    {
+        audio_stop_sound(charge_sound_inst);
+        charge_sound_inst = noone;
+    }
 }
 #endregion
 
@@ -99,6 +105,13 @@ if (weapon == WeaponType.GUN && state != PlayerState.CUTSCENE && state != Player
         // Só entra em modo charge após 60 frames segurando
         if (gun_hold_timer >= 60)
         {
+            if (!is_charging)
+            {
+                audio_sound_loop_start(snd_CarregarTiro, 1.65);
+                audio_sound_loop_end(snd_CarregarTiro, 3.20);
+                charge_sound_inst = audio_play_sound(snd_CarregarTiro, 10, true);
+            }
+
             is_charging = true;
             gun_charge  = min(gun_charge + 1, gun_max_charge);
 
@@ -126,6 +139,12 @@ if (weapon == WeaponType.GUN && state != PlayerState.CUTSCENE && state != Player
         {
             // Soltou Z antes dos 60 frames — tiro fraco imediato
             attack_type = 10;
+        }
+
+        if (charge_sound_inst != noone)
+        {
+            audio_stop_sound(charge_sound_inst);
+            charge_sound_inst = noone;
         }
 
         is_charging    = false;
@@ -184,6 +203,7 @@ case PlayerState.IDLE:
     {
         vsp   = jump_force;
         state = PlayerState.AIR;
+        audio_play_sound(snd_Jump, 10, false);
     }
 
     if (weapon != WeaponType.GUN)
@@ -215,11 +235,13 @@ case PlayerState.RUN:
     {
         vsp   = jump_force;
         state = PlayerState.AIR;
+        audio_play_sound(snd_Jump, 10, false);
     }
 
     if (key_dash && can_dash && dash_cooldown_timer <= 0) {
         state = PlayerState.DASH;
         dash_delay_timer = dash_delay;
+        audio_play_sound(snd_dash, 10, false);
     }
 
     if (weapon != WeaponType.GUN)
@@ -330,6 +352,7 @@ case PlayerState.ATTACK:
         attack_timer   = 0;
         combo_zx_ready = false;
         combo_zx_timer = 0;
+        audio_play_sound(snd_Giratorio, 10, false);
     }
 
     // HitBox Básico
@@ -403,6 +426,11 @@ case PlayerState.ATTACK:
             case 15: shootBullet(sprt_TiroRoxoForte,    _dir, 8.5,  10,   _ox, _oy, false); break;
             case 16: shootBullet(sprt_TiroVermelhoForte,_dir, 9,    9999, _ox, _oy, true);  break;
         }
+
+        if (attack_type <= 12)
+            audio_play_sound(snd_TiroFraco, 10, false);
+        else
+            audio_play_sound(snd_TiroForte, 10, false);
 
         gun_charge = 0;
         can_shoot  = false;
@@ -664,6 +692,7 @@ function _setAttackType(_wpn, _atk, _kick, _spin)
 		        combo_timer = combo_max_time;
 		        if (combo_step > 2) combo_step = 1;
 		        attack_type = combo_step;
+		        audio_play_sound(snd_Soco, 10, false);
 		        combo_zx_ready = true; 
 		        combo_zx_timer = combo_zx_window;
 		    }
@@ -678,9 +707,14 @@ function _setAttackType(_wpn, _atk, _kick, _spin)
 		        else
 		        {
 		            attack_type = 3; // chute normal
+		            audio_play_sound(snd_Kick, 10, false);
 		        }
 		    }
-		    if (_spin) attack_type = 4;
+		    if (_spin)
+		    {
+		        attack_type = 4;
+		        audio_play_sound(snd_Giratorio, 10, false);
+		    }
 		break;
 
         case WeaponType.SWORD:
@@ -690,8 +724,13 @@ function _setAttackType(_wpn, _atk, _kick, _spin)
                 combo_timer = combo_max_time;
                 if (combo_step > 2) combo_step = 1;
                 attack_type = combo_step;
+                audio_play_sound(snd_Espada, 10, false);
             }
-            if (_kick) attack_type = 3;
+            if (_kick)
+            {
+                attack_type = 3;
+                audio_play_sound(snd_EspadaLouca, 10, false);
+            }
             // sem _spin aqui
         break;
     }
@@ -726,10 +765,6 @@ if (state == PlayerState.RUN) {
         som_atual = noone;
     }
 }
-if (keyboard_check_pressed(vk_shift) && can_dash && dash_cooldown_timer <= 0) {
-    audio_play_sound(snd_dash, 10, false);
-}
-
 if (place_meeting(x, y, obj_Moedas) || place_meeting(x, y, obj_PotionLife)) {
     if (!audio_is_playing(snd_pegarItem)) {
         audio_play_sound(snd_pegarItem, 2, false);
