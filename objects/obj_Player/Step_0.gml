@@ -724,7 +724,7 @@ function _setAttackType(_wpn, _atk, _kick, _spin)
                 combo_timer = combo_max_time;
                 if (combo_step > 2) combo_step = 1;
                 attack_type = combo_step;
-                audio_play_sound(snd_EspadaNormal, 10, false);
+                audio_play_sound(snd_Espada, 10, false);
             }
             if (_kick)
             {
