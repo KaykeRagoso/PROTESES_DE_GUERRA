@@ -19,7 +19,6 @@ var move = key_right - key_left;
 if (dash_cooldown_timer > 0) dash_cooldown_timer--;
 #endregion
 
-
 #region Switch Weapon
 if (key_switchWeapon && state != PlayerState.CUTSCENE)
 {
@@ -83,6 +82,11 @@ if (combo_timer > 0)
     combo_timer--;
 else
     combo_step = 0;
+	
+if (combo_zx_timer > 0)
+    combo_zx_timer--;
+else
+    combo_zx_ready = false;
 #endregion
 
 #region Carregar Canhão
@@ -183,15 +187,16 @@ case PlayerState.IDLE:
     }
 
     if (weapon != WeaponType.GUN)
-    {
-        if ((key_attack_pressed || key_kick || key_spin) && attack_cooldown <= 0)
-        {
-            state           = PlayerState.ATTACK;
-            attack_timer    = 0;
-            attack_cooldown = attack_cooldown_max;
-            _setAttackType(weapon, key_attack_pressed, key_kick, key_spin);
-        }
-    }
+	{
+	    var _pode_spin = (weapon == WeaponType.BASIC) && key_spin;
+	    if ((key_attack_pressed || key_kick || _pode_spin) && attack_cooldown <= 0)
+	    {
+	        state           = PlayerState.ATTACK;
+	        attack_timer    = 0;
+	        attack_cooldown = attack_cooldown_max;
+	        _setAttackType(weapon, key_attack_pressed, key_kick, key_spin);
+	    }
+	}
 
 break;
 
@@ -219,12 +224,12 @@ case PlayerState.RUN:
 
     if (weapon != WeaponType.GUN)
     {
-        if ((key_attack_pressed || key_kick || key_spin) && attack_cooldown <= 0)
+        if ((key_attack_pressed || key_kick) && attack_cooldown <= 0)
         {
             state           = PlayerState.ATTACK;
             attack_timer    = 0;
             attack_cooldown = attack_cooldown_max;
-            _setAttackType(weapon, key_attack_pressed, key_kick, key_spin);
+            _setAttackType(weapon, key_attack_pressed, key_kick,false);
         }
     }
 
@@ -317,6 +322,15 @@ case PlayerState.ATTACK:
 
     hsp = 0;
     attack_timer++;
+    
+    // Combo Z+X — detecta X durante o ataque básico
+    if (weapon == WeaponType.BASIC && key_kick && combo_zx_ready && combo_zx_timer > 0)
+    {
+        attack_type    = 5;
+        attack_timer   = 0;
+        combo_zx_ready = false;
+        combo_zx_timer = 0;
+    }
 
     // HitBox Básico
     if (weapon == WeaponType.BASIC)
@@ -342,6 +356,11 @@ case PlayerState.ATTACK:
                 if (attack_timer == 6)
                     _hitEnemies(-40, -14, 40, 14, 2);
             break;
+			
+			case 5:
+			    if (attack_timer == 8)
+			        _hitEnemies(facing * 10, -20, facing * 55, 20, 5); 
+			break;
         }
     }
 
@@ -392,6 +411,7 @@ case PlayerState.ATTACK:
     // Duração do estado
     var _atk_end = (weapon == WeaponType.SWORD) ? 10 : 15;
     if (attack_type == 4) _atk_end = 18;
+	if (attack_type == 5) _atk_end = 22;
     if (attack_type == 3 && weapon == WeaponType.SWORD) _atk_end = 16;
 
     if (attack_timer > _atk_end)
@@ -534,13 +554,14 @@ case PlayerState.RUN:
         case WeaponType.SWORD: sprite_index = (facing==1) ? sprt_PlayerRunEspadaEsq : sprt_PlayerRunEspadaDir; break;
         case WeaponType.GUN:   sprite_index = (facing==1) ? sprt_PlayerRunCanhaoEsq : sprt_PlayerRunCanhaoDir; break;
     }
-    image_speed = image_number / 6;
+    image_speed = image_number / 8;
 break;
 
 case PlayerState.AIR:
     if (on_wall != 0 && vsp > 0 && weapon == WeaponType.BASIC)
     {
         sprite_index = (on_wall==1) ? sprt_PlayerWallSlideDir : sprt_PlayerWallSlideEsq;
+		image_speed = image_number / 6;
     }
     else
     {
@@ -561,6 +582,7 @@ case PlayerState.DASH:
         case WeaponType.SWORD: sprite_index = (facing==1) ? sprt_PlayerDashEspadaEsq : sprt_PlayerDashEspadaDir; break;
         case WeaponType.GUN:   sprite_index = (facing==1) ? sprt_PlayerDashCanhaoEsq : sprt_PlayerDashCanhaoDir; break;
     }
+	image_speed = image_number / 4;
 break;
 
 case PlayerState.ATTACK:
@@ -572,7 +594,9 @@ case PlayerState.ATTACK:
             case 2: sprite_index = (facing==1) ? sprt_PlayerSocoFrenteEsq      : sprt_PlayerSocoFrenteDir;      break;
             case 3: sprite_index = (facing==1) ? sprt_PlayerChuteBaixoEsq      : sprt_PlayerChuteBaixoDir;      break;
             case 4: sprite_index = (facing==1) ? sprt_PlayerAtaqueGiratorioEsq : sprt_PlayerAtaqueGiratorioDir; break;
+			case 5: sprite_index = (facing==1) ? sprt_PlayerSuperGiratorioEsq : sprt_PlayerSuperGiratorioDir; break;
         }
+		image_speed = image_number / 6;
     }
 
     if (weapon == WeaponType.SWORD)
@@ -587,7 +611,7 @@ case PlayerState.ATTACK:
 
             case 3:
                 sprite_index = (facing==1) ? sprt_PlayerAtaqueLoucoEspadaEsq : sprt_PlayerAtaqueLoucoEspadaDir;
-                image_speed = image_number / 6;
+                image_speed = image_number / 8;
             break;
         }
     }
@@ -633,17 +657,31 @@ function _setAttackType(_wpn, _atk, _kick, _spin)
 {
     switch (_wpn)
     {
-        case WeaponType.BASIC:
-            if (_atk)
-            {
-                combo_step += 1;
-                combo_timer = combo_max_time;
-                if (combo_step > 2) combo_step = 1;
-                attack_type = combo_step;
-            }
-            if (_kick) attack_type = 3;
-            if (_spin) attack_type = 4;
-        break;
+		case WeaponType.BASIC:
+		    if (_atk)
+		    {
+		        combo_step += 1;
+		        combo_timer = combo_max_time;
+		        if (combo_step > 2) combo_step = 1;
+		        attack_type = combo_step;
+		        combo_zx_ready = true; 
+		        combo_zx_timer = combo_zx_window;
+		    }
+		    if (_kick)
+		    {
+		        if (combo_zx_ready && combo_zx_timer > 0) 
+		        {
+		            attack_type = 5;
+		            combo_zx_ready = false;
+		            combo_zx_timer = 0;
+		        }
+		        else
+		        {
+		            attack_type = 3; // chute normal
+		        }
+		    }
+		    if (_spin) attack_type = 4;
+		break;
 
         case WeaponType.SWORD:
             if (_atk)
@@ -654,6 +692,7 @@ function _setAttackType(_wpn, _atk, _kick, _spin)
                 attack_type = combo_step;
             }
             if (_kick) attack_type = 3;
+            // sem _spin aqui
         break;
     }
 }
@@ -687,16 +726,18 @@ if (state == PlayerState.RUN) {
         som_atual = noone;
     }
 }
-if keyboard_check_pressed(vk_shift){
-	if key_dash = true{
-		if (dash_delay_timer > 0)
-		audio_play_sound(snd_dash,10,false)
-	}
+if (keyboard_check_pressed(vk_shift) && can_dash && dash_cooldown_timer <= 0) {
+    audio_play_sound(snd_dash, 10, false);
 }
 
 if (place_meeting(x, y, obj_Moedas) || place_meeting(x, y, obj_PotionLife)) {
     if (!audio_is_playing(snd_pegarItem)) {
         audio_play_sound(snd_pegarItem, 2, false);
     }
+}
+
+if (state == PlayerState.HIT && hit_timer == hit_duration){
+	var hitSound = choose(snd_hit,snd_hitnovoice);
+	audio_play_sound(hitSound,2,false);
 }
 #endregion

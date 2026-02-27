@@ -1,14 +1,15 @@
-var _x = 50;  // Posição X no canto da tela
-var _y = 720;  // Posição Y no canto da tela
+var base_w = 1280;
+var base_h = 720;
+var escala_x = display_get_gui_width()  / base_w;
+var escala_y = display_get_gui_height() / base_h;
+var _x = 50  * escala_x;
+var _y = 640 * escala_y;
 
-// Desenha o sprite da poção
-// draw_sprite(sprite, subimagem, x, y)
+draw_sprite_ext(spr_pocaovida, 0, _x, _y, escala_x, escala_y, 0, c_white, 1);
 
-draw_sprite(spr_pocaovida, 0, _x, _y);
-
-// Configura a fonte e cor para o texto
 draw_set_color(c_white);
 draw_set_halign(fa_left);
-
-// Desenha a quantidade ao lado do sprite
-draw_text(_x + 40, _y - 10, "x" + string(global.pocoes));
+draw_set_font(fnt_hud_vida_porc);
+// Escala mínima de 1.5 pra não ficar pequeno demais
+var escala_texto = max(escala_x, 1.5);
+draw_text_transformed(_x + 40 * escala_x, _y - 10 * escala_y, "x" + string(global.pocoes), escala_texto, escala_texto, 0);

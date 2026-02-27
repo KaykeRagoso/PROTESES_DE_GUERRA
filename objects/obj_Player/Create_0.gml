@@ -12,7 +12,6 @@ jump_force_gun   = -9;
 jump_force_sword = -12;
 jump_force       = jump_force_basic;
 
-som_atual = noone;
 
 //Direção e Dash
 facing           = 1;
@@ -90,10 +89,15 @@ attack_cooldown_max = 5;
 maxFall = 10;
 
 
+
+
 //Combo
 combo_step     = 0;
 combo_timer    = 0;
 combo_max_time = 20;
+combo_zx_timer = 0;
+combo_zx_window = 60; // janela de tempo pra apertar X após Z
+combo_zx_ready = false;
 
 //Moeda
 global.moeda = 0;
@@ -155,3 +159,4 @@ function takeDamage(_amount, _knockback_dir) {
     hit_timer        = hit_duration;
     state            = PlayerState.HIT;
 }
+
