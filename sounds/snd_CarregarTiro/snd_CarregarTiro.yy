@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"snd_CarregarTiro",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":5.3759866,
+  "exportDir":"",
+  "name":"snd_CarregarTiro",
+  "parent":{
+    "name":"PlayerSons",
+    "path":"folders/Sons/PlayerSons.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_CarregarTiro.ogg",
+  "volume":1.0,
+}
