@@ -37,6 +37,6 @@ if (!instance_exists(obj_Player) || obj_Player.state != PlayerState.DEATH) {
     draw_set_color(c_white);
     draw_set_font(fnt_hud_vida_porc);
     var escala_texto_vida = escala_x * 0.60; // ajusta o 0.5 até ficar do tamanho certo
-    draw_text_transformed(_x - 4, _y, string(global.vida_atual) + "/" + string(global.vida_max), escala_texto_vida, escala_texto_vida, 0);
+    draw_text_transformed(_x - 4, _y + 2, string(global.vida_atual) + "/" + string(global.vida_max), escala_texto_vida, escala_texto_vida, 0);
     draw_set_color(c_white);
 }
