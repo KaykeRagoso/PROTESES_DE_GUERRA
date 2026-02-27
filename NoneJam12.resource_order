@@ -1,7 +1,6 @@
 {
   "FolderOrderSettings":[
     {"name":"Fontes","order":7,"path":"folders/Fontes.yy",},
-    {"name":"SistemaDialogo","order":17,"path":"folders/SistemaDialogo.yy",},
     {"name":"Objetos","order":4,"path":"folders/Objetos.yy",},
     {"name":"enemy2","order":4,"path":"folders/Objetos/enemy2.yy",},
     {"name":"sprites","order":3,"path":"folders/Objetos/enemy2/sprites.yy",},
@@ -17,6 +16,7 @@
     {"name":"npc1","order":1,"path":"folders/Objetos/npc/npc1.yy",},
     {"name":"Rooms","order":6,"path":"folders/Rooms.yy",},
     {"name":"sistema_de_luz_basico","order":1,"path":"folders/sistema_de_luz_basico.yy",},
+    {"name":"SistemaDialogo","order":17,"path":"folders/SistemaDialogo.yy",},
     {"name":"Sons","order":5,"path":"folders/Sons.yy",},
     {"name":"HitPlayer","order":5,"path":"folders/Sons/HitPlayer.yy",},
     {"name":"PlayerSons","order":6,"path":"folders/Sons/PlayerSons.yy",},
@@ -100,7 +100,6 @@
     {"name":"snd_Espada","order":2,"path":"sounds/snd_Espada/snd_Espada.yy",},
     {"name":"snd_EspadaLouca","order":3,"path":"sounds/snd_EspadaLouca/snd_EspadaLouca.yy",},
     {"name":"snd_Giratorio","order":1,"path":"sounds/snd_Giratorio/snd_Giratorio.yy",},
-    {"name":"snd_Guerra","order":19,"path":"sounds/snd_Guerra/snd_Guerra.yy",},
     {"name":"snd_hitnovoice","order":1,"path":"sounds/snd_hitnovoice/snd_hitnovoice.yy",},
     {"name":"snd_Kick","order":4,"path":"sounds/snd_Kick/snd_Kick.yy",},
     {"name":"snd_logo","order":2,"path":"sounds/snd_logo/snd_logo.yy",},

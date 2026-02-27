@@ -109,13 +109,11 @@ function dropItem(){
 
     var chance = irandom_range(1,100);
 	
-    if (chance <= 35){
-        instance_create_layer(x,y,"Instances",obj_PotionLife)
-    }
-    else if (chance <= 20){
-        instance_create_layer(x,y,"Instances",obj_Moedas)
-    }
-
+	if (chance <= 20){
+		instance_create_layer(x,y,"Instances",obj_Moedas);	
+	}else if (chance <= 55){
+		instance_create_layer(x,y,"Instances",obj_PotionLife);
+	}
 }
 
 function takeDamage(_dano,_dir){
