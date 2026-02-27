@@ -763,8 +763,3 @@ if (state == PlayerState.HIT && hit_timer == hit_duration){
 	audio_play_sound(hitSound,2,false);
 }
 #endregion
-
-if (keyboard_check_pressed(vk_f2)) {
-	global.vida_atual = 0;
-	state = PlayerState.DEATH;
-}
