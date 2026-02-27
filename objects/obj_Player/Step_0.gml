@@ -539,6 +539,7 @@ case PlayerState.AIR:
     if (on_wall != 0 && vsp > 0 && weapon == WeaponType.BASIC)
     {
         sprite_index = (on_wall==1) ? sprt_PlayerWallSlideDir : sprt_PlayerWallSlideEsq;
+		image_speed = image_number / 6;
     }
     else
     {
@@ -559,6 +560,7 @@ case PlayerState.DASH:
         case WeaponType.SWORD: sprite_index = (facing==1) ? sprt_PlayerDashEspadaEsq : sprt_PlayerDashEspadaDir; break;
         case WeaponType.GUN:   sprite_index = (facing==1) ? sprt_PlayerDashCanhaoEsq : sprt_PlayerDashCanhaoDir; break;
     }
+	image_speed = image_number / 4;
 break;
 
 case PlayerState.ATTACK:
