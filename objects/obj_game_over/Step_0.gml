@@ -24,6 +24,6 @@ if (pode_reiniciar) {
 		    with (obj_Player) instance_destroy();
 			
         instance_destroy();
-        room_goto(menu); // volta para o menu
+		game_restart();
     }
 }

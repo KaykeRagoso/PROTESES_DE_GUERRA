@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_Reset",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_Reset",
+  "parent":{
+    "name":"NoneJam12",
+    "path":"NoneJam12.yyp",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

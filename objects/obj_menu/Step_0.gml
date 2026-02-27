@@ -6,14 +6,12 @@ if (iniciando) {
 
     if (fade_alpha >= 1) {
         fade_alpha = 1;
-        room_goto_next();
+		scr_Reset();
+		room_goto(Room1);
     }
 
     exit;
 }
-
-//teste
-
 // ==========================================
 // 2. Se estiver na confirmação de saída
 // ==========================================
