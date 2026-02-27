@@ -1,5 +1,5 @@
 // Opções
-menu_options = ["INICIAR SINCRONIZAÇÃO", "ÁREA DE TREINAMENTO", "CONFIGURAÇÕES", "ABANDONAR"];
+menu_options = ["INICIAR", "CONFIGURAÇÕES", "CRÉDITOS/PRESETS", "SAIR"];
 index = 0;
 
 alpha = 0;
@@ -19,3 +19,11 @@ for (var i = 0; i < array_length(menu_options); i++) {
 input_modo = "teclado"; //começa no teclado por padrão
 mouse_last_x = mouse_x;
 mouse_last_y = mouse_y;
+
+fade_alpha = 0;
+fade_speed = 0.04;
+iniciando = false;
+
+// Confirmação de saída
+confirmando_saida = false;
+confirm_index = 0; // 0 = SIM | 1 = NÃO
