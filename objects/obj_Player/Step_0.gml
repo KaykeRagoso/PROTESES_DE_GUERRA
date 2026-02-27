@@ -82,6 +82,11 @@ if (combo_timer > 0)
     combo_timer--;
 else
     combo_step = 0;
+	
+if (combo_zx_timer > 0)
+    combo_zx_timer--;
+else
+    combo_zx_ready = false;
 #endregion
 
 #region Carregar Canhão
@@ -315,6 +320,15 @@ case PlayerState.ATTACK:
 
     hsp = 0;
     attack_timer++;
+    
+    // Combo Z+X — detecta X durante o ataque básico
+    if (weapon == WeaponType.BASIC && key_kick && combo_zx_ready && combo_zx_timer > 0)
+    {
+        attack_type    = 5;
+        attack_timer   = 0;
+        combo_zx_ready = false;
+        combo_zx_timer = 0;
+    }
 
     // HitBox Básico
     if (weapon == WeaponType.BASIC)
@@ -340,6 +354,11 @@ case PlayerState.ATTACK:
                 if (attack_timer == 6)
                     _hitEnemies(-40, -14, 40, 14, 2);
             break;
+			
+			case 5:
+			    if (attack_timer == 8)
+			        _hitEnemies(facing * 10, -20, facing * 55, 20, 5); 
+			break;
         }
     }
 
@@ -390,6 +409,7 @@ case PlayerState.ATTACK:
     // Duração do estado
     var _atk_end = (weapon == WeaponType.SWORD) ? 10 : 15;
     if (attack_type == 4) _atk_end = 18;
+	if (attack_type == 5) _atk_end = 22;
     if (attack_type == 3 && weapon == WeaponType.SWORD) _atk_end = 16;
 
     if (attack_timer > _atk_end)
@@ -572,6 +592,7 @@ case PlayerState.ATTACK:
             case 2: sprite_index = (facing==1) ? sprt_PlayerSocoFrenteEsq      : sprt_PlayerSocoFrenteDir;      break;
             case 3: sprite_index = (facing==1) ? sprt_PlayerChuteBaixoEsq      : sprt_PlayerChuteBaixoDir;      break;
             case 4: sprite_index = (facing==1) ? sprt_PlayerAtaqueGiratorioEsq : sprt_PlayerAtaqueGiratorioDir; break;
+			case 5: sprite_index = (facing==1) ? sprt_PlayerSuperGiratorioEsq : sprt_PlayerSuperGiratorioDir; break;
         }
 		image_speed = image_number / 6;
     }
@@ -588,7 +609,7 @@ case PlayerState.ATTACK:
 
             case 3:
                 sprite_index = (facing==1) ? sprt_PlayerAtaqueLoucoEspadaEsq : sprt_PlayerAtaqueLoucoEspadaDir;
-                image_speed = image_number / 6;
+                image_speed = image_number / 8;
             break;
         }
     }
@@ -634,17 +655,31 @@ function _setAttackType(_wpn, _atk, _kick, _spin)
 {
     switch (_wpn)
     {
-        case WeaponType.BASIC:
-            if (_atk)
-            {
-                combo_step += 1;
-                combo_timer = combo_max_time;
-                if (combo_step > 2) combo_step = 1;
-                attack_type = combo_step;
-            }
-            if (_kick) attack_type = 3;
-            if (_spin) attack_type = 4; 
-        break;
+		case WeaponType.BASIC:
+		    if (_atk)
+		    {
+		        combo_step += 1;
+		        combo_timer = combo_max_time;
+		        if (combo_step > 2) combo_step = 1;
+		        attack_type = combo_step;
+		        combo_zx_ready = true; 
+		        combo_zx_timer = combo_zx_window;
+		    }
+		    if (_kick)
+		    {
+		        if (combo_zx_ready && combo_zx_timer > 0) 
+		        {
+		            attack_type = 5;
+		            combo_zx_ready = false;
+		            combo_zx_timer = 0;
+		        }
+		        else
+		        {
+		            attack_type = 3; // chute normal
+		        }
+		    }
+		    if (_spin) attack_type = 4;
+		break;
 
         case WeaponType.SWORD:
             if (_atk)

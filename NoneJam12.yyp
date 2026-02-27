@@ -163,6 +163,7 @@
     {"id":{"name":"spr_pixel","path":"sprites/spr_pixel/spr_pixel.yy",},},
     {"id":{"name":"spr_pocaovida","path":"sprites/spr_pocaovida/spr_pocaovida.yy",},},
     {"id":{"name":"Sprite103","path":"sprites/Sprite103/Sprite103.yy",},},
+    {"id":{"name":"Sprite106","path":"sprites/Sprite106/Sprite106.yy",},},
     {"id":{"name":"sprt_Block","path":"sprites/sprt_Block/sprt_Block.yy",},},
     {"id":{"name":"sprt_Bullet","path":"sprites/sprt_Bullet/sprt_Bullet.yy",},},
     {"id":{"name":"sprt_FrascoVida","path":"sprites/sprt_FrascoVida/sprt_FrascoVida.yy",},},

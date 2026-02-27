@@ -110,6 +110,7 @@
     {"name":"spr_parallax6","order":3,"path":"sprites/spr_parallax6/spr_parallax6.yy",},
     {"name":"spr_parallax7","order":4,"path":"sprites/spr_parallax7/spr_parallax7.yy",},
     {"name":"Sprite103","order":9,"path":"sprites/Sprite103/Sprite103.yy",},
+    {"name":"Sprite106","order":4,"path":"sprites/Sprite106/Sprite106.yy",},
     {"name":"sprt_Block","order":1,"path":"sprites/sprt_Block/sprt_Block.yy",},
     {"name":"sprt_Inimigo","order":3,"path":"sprites/sprt_Inimigo/sprt_Inimigo.yy",},
     {"name":"sprt_Moeda","order":1,"path":"sprites/sprt_Moeda/sprt_Moeda.yy",},
