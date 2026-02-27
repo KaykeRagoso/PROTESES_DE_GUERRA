@@ -1,3 +1,6 @@
+global.vida_atual = 100;
+global.vida_max   = 100;
+
 //Movimento
 hsp    = 0;
 vsp    = 0;
@@ -71,6 +74,14 @@ enum WeaponType {
 //Estado Inicial
 state  = PlayerState.IDLE;
 weapon = WeaponType.BASIC;
+
+// Garante que o diálogo está limpo ao criar o player
+if (instance_exists(obj_Dialogo)) {
+    obj_Dialogo.dialogo_ativo = false;
+    obj_Dialogo.linhas        = [];
+    obj_Dialogo.linha_atual   = 0;
+    obj_Dialogo.npc_dono      = noone;
+}
 
 // Vida do player
 max_hp = 100;
@@ -160,3 +171,4 @@ function takeDamage(_amount, _knockback_dir) {
     state            = PlayerState.HIT;
 }
 
+show_debug_message("Player criado - vida: " + string(global.vida_atual) + " | state: " + string(state));

@@ -1,7 +1,8 @@
 #region Input
 var key_left     = keyboard_check(ord("A")) || keyboard_check(vk_left);
 var key_right    = keyboard_check(ord("D")) || keyboard_check(vk_right);
-var key_jump     = keyboard_check_pressed(vk_space) || keyboard_check_pressed(vk_up);
+var _dialogo_ativo = instance_exists(obj_Dialogo) && obj_Dialogo.dialogo_ativo;
+var key_jump       = (keyboard_check_pressed(vk_space) || keyboard_check_pressed(vk_up)) && !_dialogo_ativo;
 var key_dash     = keyboard_check_pressed(vk_shift);
 
 var key_switchWeapon   = keyboard_check_pressed(vk_tab);
@@ -471,17 +472,16 @@ case PlayerState.DEATH:
 
     death_timer++;
 
-    // Gruda no chão feito um cadáver
     if (place_meeting(x, y + 1, obj_Block)) {
         vsp = 0;
-        // Empurra pra fora do chão caso esteja enterrado
         while (place_meeting(x, y, obj_Block)) {
             y--;
         }
 
         if (death_timer > 10 && !instance_exists(obj_game_over)) {
             instance_create_layer(0, 0, "Instances", obj_game_over);
-
+			show_debug_message("DEATH - death_timer: " + string(death_timer) + " | vida: " + string(global.vida_atual));
+            exit;
         }
     }
 break;
@@ -777,3 +777,8 @@ if (state == PlayerState.HIT && hit_timer == hit_duration){
 	audio_play_sound(hitSound,2,false);
 }
 #endregion
+
+if (keyboard_check_pressed(vk_f2)) {
+	global.vida_atual = 0;
+	state = PlayerState.DEATH;
+}

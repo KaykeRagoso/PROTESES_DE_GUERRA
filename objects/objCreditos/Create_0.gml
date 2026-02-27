@@ -1,1 +1,1 @@
-texto = "creditos por toda a equipe:blabla"
+texto = "creditos por toda a equipe:Genesis Studios"

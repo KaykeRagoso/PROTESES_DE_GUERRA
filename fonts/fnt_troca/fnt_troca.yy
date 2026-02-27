@@ -208,8 +208,8 @@
   "maintainGms1Font":false,
   "name":"fnt_troca",
   "parent":{
-    "name":"NoneJam12",
-    "path":"NoneJam12.yyp",
+    "name":"Fontes",
+    "path":"folders/Fontes.yy",
   },
   "pointRounding":0,
   "ranges":[
