@@ -12,6 +12,7 @@ creditos = [
 "OpenGameArt",
 "Kenney.nl",
 "Spriters-Resource",
+"CraftPix",
 "",
 "GAME JAM",
 "NoneJam12",

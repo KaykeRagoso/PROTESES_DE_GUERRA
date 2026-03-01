@@ -21,9 +21,8 @@ if (pode_reiniciar) {
             obj_Dialogo.linha_atual = 0;
             obj_Dialogo.npc_dono = noone;
         }
-		    with (obj_Player) instance_destroy();
-			
-        instance_destroy();
+
 		game_restart();
+		
     }
 }

@@ -33,9 +33,12 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"sprt_Block",
-    "path":"sprites/sprt_Block/sprt_Block.yy",
+    "name":"sprt_SoldadoRun",
+    "path":"sprites/sprt_SoldadoRun/sprt_SoldadoRun.yy",
   },
-  "spriteMaskId":null,
+  "spriteMaskId":{
+    "name":"sprt_SoldadoMask",
+    "path":"sprites/sprt_SoldadoMask/sprt_SoldadoMask.yy",
+  },
   "visible":true,
 }

@@ -32,7 +32,13 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
-  "spriteMaskId":null,
+  "spriteId":{
+    "name":"sprt_SapoRun",
+    "path":"sprites/sprt_SapoRun/sprt_SapoRun.yy",
+  },
+  "spriteMaskId":{
+    "name":"sprt_SapoMask",
+    "path":"sprites/sprt_SapoMask/sprt_SapoMask.yy",
+  },
   "visible":true,
 }
