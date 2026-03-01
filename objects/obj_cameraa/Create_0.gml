@@ -1,9 +1,9 @@
 // 1. Resolução Interna (Baixa para manter o estilo Pixel Art)
-largura_view = camera_get_view_width(view_camera[0]) / 1.5; 
-altura_view = camera_get_view_height(view_camera[0]) / 1.5;
+largura_view = camera_get_view_width(view_camera[0]) / 1; 
+altura_view = camera_get_view_height(view_camera[0]) / 1;
 
 // 2. Multiplicador da Janela (Aumenta o tamanho da janela sem borrar)
-escala_janela = 2; 
+escala_janela = 1.5; 
 
 // 3. Configurações de Seguimento
 alvo = obj_Player;
