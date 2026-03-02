@@ -737,6 +737,9 @@ function _hitEnemies(_x1, _y1, _x2, _y2, _dmg)
 }
 
 #region Sons
+if (!audio_is_playing(snd_Guerra)) {
+    audio_play_sound(snd_Guerra, 0, true);
+}
 if (state == PlayerState.RUN) {    
         // correr
         if (som_atual != snd_passos_terra) {

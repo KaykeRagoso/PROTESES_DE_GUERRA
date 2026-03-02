@@ -111,6 +111,7 @@
     {"name":"snd_Espada","order":2,"path":"sounds/snd_Espada/snd_Espada.yy",},
     {"name":"snd_EspadaLouca","order":3,"path":"sounds/snd_EspadaLouca/snd_EspadaLouca.yy",},
     {"name":"snd_Giratorio","order":1,"path":"sounds/snd_Giratorio/snd_Giratorio.yy",},
+    {"name":"snd_Guerra","order":25,"path":"sounds/snd_Guerra/snd_Guerra.yy",},
     {"name":"snd_hitnovoice","order":1,"path":"sounds/snd_hitnovoice/snd_hitnovoice.yy",},
     {"name":"snd_Kick","order":4,"path":"sounds/snd_Kick/snd_Kick.yy",},
     {"name":"snd_logo","order":2,"path":"sounds/snd_logo/snd_logo.yy",},

@@ -151,6 +151,7 @@
     {"id":{"name":"snd_Espada","path":"sounds/snd_Espada/snd_Espada.yy",},},
     {"id":{"name":"snd_EspadaLouca","path":"sounds/snd_EspadaLouca/snd_EspadaLouca.yy",},},
     {"id":{"name":"snd_Giratorio","path":"sounds/snd_Giratorio/snd_Giratorio.yy",},},
+    {"id":{"name":"snd_Guerra","path":"sounds/snd_Guerra/snd_Guerra.yy",},},
     {"id":{"name":"snd_hit","path":"sounds/snd_hit/snd_hit.yy",},},
     {"id":{"name":"snd_hitnovoice","path":"sounds/snd_hitnovoice/snd_hitnovoice.yy",},},
     {"id":{"name":"snd_hitplayer","path":"sounds/snd_hitplayer/snd_hitplayer.yy",},},
