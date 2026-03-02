@@ -36,5 +36,5 @@
     "path":"sprites/spr_colisao_dialogo/spr_colisao_dialogo.yy",
   },
   "spriteMaskId":null,
-  "visible":true,
+  "visible":false,
 }

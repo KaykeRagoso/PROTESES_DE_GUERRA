@@ -64,7 +64,7 @@
     },
     "name":"sprt_PlayerAtaqueEspadaEsq",
     "playback":1,
-    "playbackSpeed":12.0,
+    "playbackSpeed":20.0,
     "playbackSpeedType":0,
     "resourceType":"GMSequence",
     "resourceVersion":"2.0",

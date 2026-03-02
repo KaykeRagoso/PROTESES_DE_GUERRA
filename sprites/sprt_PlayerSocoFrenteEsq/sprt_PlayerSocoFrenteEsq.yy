@@ -65,7 +65,7 @@
     },
     "name":"sprt_PlayerSocoFrenteEsq",
     "playback":1,
-    "playbackSpeed":12.0,
+    "playbackSpeed":18.0,
     "playbackSpeedType":0,
     "resourceType":"GMSequence",
     "resourceVersion":"2.0",

@@ -65,7 +65,7 @@
     },
     "name":"sprt_PlayerChuteBaixoDir",
     "playback":1,
-    "playbackSpeed":11.0,
+    "playbackSpeed":19.0,
     "playbackSpeedType":0,
     "resourceType":"GMSequence",
     "resourceVersion":"2.0",

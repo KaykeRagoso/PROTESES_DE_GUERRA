@@ -6,8 +6,8 @@
   "name":"obj_Block",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objetos",
-    "path":"folders/Objetos.yy",
+    "name":"parallax",
+    "path":"folders/parallax.yy",
   },
   "parentObjectId":null,
   "persistent":false,
@@ -32,5 +32,5 @@
     "path":"sprites/sprt_Block/sprt_Block.yy",
   },
   "spriteMaskId":null,
-  "visible":true,
+  "visible":false,
 }
